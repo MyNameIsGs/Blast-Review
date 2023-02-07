@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Formik } from "formik";
 import "../../../styles/home.css";
 
-export const Register = () => {
+const Login = () => {
   const userValues = {
     email: "",
     password: "",
@@ -15,7 +15,7 @@ export const Register = () => {
     // e.preventDefault();
     setError(null);
     try {
-      const resp = await fetch(`${process.env.BACKEND_URL}/user`, {
+      const resp = await fetch(`${process.env.BACKEND_URL}api/user`, {
         method: "POST",
         body: JSON.stringify({
           ...values,
@@ -122,4 +122,4 @@ export const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
