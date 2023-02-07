@@ -17,7 +17,7 @@ const Register = () => {
     // e.preventDefault();
     setError(null);
     try {
-      const resp = await fetch(`${process.env.BACKEND_URL}api/user`, {
+      const resp = await fetch(`${process.env.BACKEND_URL}/api/user`, {
         method: "POST",
         body: JSON.stringify({
           ...values,
