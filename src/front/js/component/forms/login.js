@@ -1,8 +1,14 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { Formik } from "formik";
+import { Context } from "../../store/appContext";
+import useAuth from "../../hooks/useAuth";
 import "../../../styles/home.css";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { store, actions } = useContext(Context);
+  const { setUserContext } = useAuth();
   const userValues = {
     email: "",
     password: "",
@@ -15,7 +21,7 @@ const Login = () => {
     // e.preventDefault();
     setError(null);
     try {
-      const resp = await fetch(`${process.env.BACKEND_URL}api/user`, {
+      const resp = await fetch(`${process.env.BACKEND_URL}/api/token`, {
         method: "POST",
         body: JSON.stringify({
           ...values,
@@ -30,7 +36,12 @@ const Login = () => {
       const data = await resp.json();
       console.log(data);
       setSubmitting(false);
-      if (resp.ok) setResult(data.result);
+      if (resp.ok) {
+        localStorage.setItem("jwt-token", data.token);
+        actions.storeToken(data.token);
+        await setUserContext();
+        navigate('/private');
+      }
       else setError(`Something went wrong: ${data.msg}`);
     } catch (e) {
       console.log(e);
@@ -70,7 +81,7 @@ const Login = () => {
       }) => (
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label for="exampleInputEmail1" className="form-label">
+            <label htmlFor="exampleInputEmail1" className="form-label">
               Email address
             </label>
             <input
@@ -88,7 +99,7 @@ const Login = () => {
             )}
           </div>
           <div className="mb-3">
-            <label for="exampleInputPassword1" className="form-label">
+            <label htmlFor="exampleInputPassword1" className="form-label">
               Password
             </label>
             <input
@@ -105,17 +116,13 @@ const Login = () => {
             )}
           </div>
           {error && <p className="text-danger">{error}</p>}
-          {!result ? (
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={isSubmitting}
-            >
-              Register
-            </button>
-          ) : (
-            <p className="text-success">User registered!</p>
-          )}
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={isSubmitting}
+          >
+            Login
+          </button>
         </form>
       )}
     </Formik>
