@@ -16,3 +16,23 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/user', methods=['POST'])
+def register_user():
+
+    data = request.json
+    user = User.query.filter_by(email=data['email']).first()
+    if user is not None:
+        return jsonify({"msg": "This email is already registered"}), 400
+    user = User.query.filter_by(username=data['username']).first()
+    if user is not None:
+        return jsonify({"msg": "This username is already registered"}), 400
+    user = User(email=data['email'], username=data['username'], password=data['password'], is_active=True)
+    db.session.add(user)
+    db.session.commit()
+
+    response_body = {
+        'result': user.serialize()
+    }
+
+    return jsonify(response_body), 201

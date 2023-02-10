@@ -1,3 +1,35 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+.commentBox{
+    
+    background-color: #e6e6e6;
+}
+
+.information{
+    max-width: 400px;
+}
+
+.cover{
+    width: 400px;
+    height: 480px;
+}
+
+.imageCover{
+    object-fit: cover;
+    width:100%;
+    height:100%;
+}
+
+.score{
+    margin:0px auto
+}
+
+.habitual{
+    background-color: orange;
+}
+
+.casual{
+    background-color: aqua;
+}
+
