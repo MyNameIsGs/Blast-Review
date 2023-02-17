@@ -7,7 +7,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const { logOut } = useAuth();
   return (
-    <nav className="navbar navbar-light bg-light">
+    <nav className="navbar navbar-light bg-light navbar-expand-lg bg-body-tertiary">
       <div className="container">
         <Link to="/">
           <span className="navbar-brand mb-0 h1">React Boilerplate</span>
