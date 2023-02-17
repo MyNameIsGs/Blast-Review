@@ -7,10 +7,10 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const { logOut } = useAuth();
   return (
-    <nav className="navbar navbar-light bg-light">
+    <nav className="navbar navbar-dark bg-dark">
       <div className="container">
         <Link to="/">
-          <span className="navbar-brand mb-0 h1">React Boilerplate</span>
+          <span className="navbar-brand mb-0 h1"><img src="https://i.ibb.co/3Fmr1HB/Blast-Review-Logo.png" className="logoBlast"></img></span>
         </Link>
         <div className="ml-auto">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -24,7 +24,7 @@ export const Navbar = () => {
                 Sign up
               </a>
             </li> */}
-            {store.user ?  (
+            {store.user ? (
               <li class="nav-item">
                 <a
                   class="nav-link"

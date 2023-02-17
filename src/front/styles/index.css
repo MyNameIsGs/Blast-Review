@@ -11,8 +11,8 @@
 }
 
 .cover{
-    width: 400px;
-    height: 480px;
+    width: 300px;
+    height: 380px;
 }
 
 .imageCover{
@@ -27,9 +27,40 @@
 
 .habitual{
     background-color: orange;
+    border-start-end-radius:40px;
+    border-end-end-radius: 40px;
 }
 
 .casual{
     background-color: aqua;
+    border-end-start-radius:40px;
+    border-start-start-radius: 40px;
 }
 
+
+
+body {
+    background-image: url(https://i.ibb.co/b2Q0mRJ/Blast-Review.png);
+    background-repeat: no-repeat;
+  background-size: 100%; 
+  
+    
+}
+
+.commentBox{
+    border-radius: 10px;
+}
+
+.navbar{
+    margin: 0px;
+}
+
+.logoBlast{
+    width: 200px;
+    
+}
+
+.marginPage{
+    margin-left: 100px;
+    margin-right: 100px;
+}

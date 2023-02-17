@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 export const Game = () => {
   return (
-    <div className="d-flex">
+    <div className="d-flex pt-3 marginPage">
       <div className="cover ps-3">
-        <h2 className="text-center">The Legend of Zelda</h2>
+        <h2 className="text-center">The Legend of Zelda <h6>(2017)</h6></h2>
         <img
           className="imageCover"
           src="https://upload.wikimedia.org/wikipedia/en/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg"
@@ -11,12 +11,12 @@ export const Game = () => {
       </div>
       <div className="information">
         <div className=" container d-flex ">
-          <div className="pt-3 score ">
+          <div className="pt-3 score casual">
             <p className="text-center mb-0 mx-4"> Puntaje Casual 👶</p>
 
             <p className="text-center mt-0"> 6/10</p>
           </div>
-          <div className="pt-3 score ">
+          <div className="pt-3 score habitual">
             <p className="text-center mb-0 mx-4"> Puntaje Habitual 💪</p>
             <p className="text-center mt-0"> 9/10</p>
           </div>
