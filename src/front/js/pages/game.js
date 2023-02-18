@@ -22,7 +22,7 @@ export const Game = () => {
           </div>
         </div>
 
-        <div className="container">
+        <div className="container pt-3">
           <p>
             The Legend of Zelda: Breath of the Wild es la nueva aventura de
             acción de Nintendo para Wii U y Nintendo Switch que nos presenta el

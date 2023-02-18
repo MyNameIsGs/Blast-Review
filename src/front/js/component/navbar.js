@@ -7,7 +7,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const { logOut } = useAuth();
   return (
-    <nav className="navbar navbar-dark bg-dark">
+    <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
       <div className="container">
         <Link to="/">
           <span className="navbar-brand mb-0 h1"><img src="https://i.ibb.co/3Fmr1HB/Blast-Review-Logo.png" className="logoBlast"></img></span>
