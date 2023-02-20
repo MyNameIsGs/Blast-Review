@@ -46,7 +46,12 @@ class Game(db.Model):
             "title": self.title,
             "description": self.description,
             "picture": self.picture,
-            "tags": self.tags,
+            "author": self.author,
+            "company": self.company,
+            "release_date": self.release_date,
+            "tags": [{
+                **tag.serialize()
+            } for tag in self.tags],
         }
 
 class Tag(db.Model):
@@ -77,8 +82,10 @@ class Comment(db.Model):
         return f'<Comment {self.id}>'
     
     def serialize(self):
+        user = User.query.filter_by(id=self.user_id).first()
         return {
             "id": self.id,
             "content": self.content,
             "created": self.created,
+            "user": user.serialize(),
         }

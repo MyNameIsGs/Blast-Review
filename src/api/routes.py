@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Comment, Game
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
@@ -60,3 +60,32 @@ def protected():
     user = User.query.get(current_user_id)
     
     return jsonify({"id": user.id, "email": user.email }), 200
+
+@api.route('/comment', methods=['POST'])
+def create_comment():
+
+    data = request.json
+
+    comment = Comment(
+                    content=data['content'],
+                    user_id=data['user_id'], 
+                    game_id=data['game_id']
+                )
+    db.session.add(comment)
+    db.session.commit()
+
+    response_body = {
+        'result': comment.serialize()
+    }
+
+    return jsonify(response_body), 201
+
+@api.route('/game/<int:game_id>', methods=['GET'])
+def get_single_game(game_id):
+
+    game = Game.query.filter_by(id=game_id).first()
+    if game is None:
+        return jsonify({"msg": "Game not found"}), 404
+    comments = Comment.query.filter_by(game_id=game_id).all()
+    
+    return jsonify({  "comments": [{**comment.serialize()} for comment in comments], **game.serialize() })
