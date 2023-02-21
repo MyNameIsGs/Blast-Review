@@ -1,12 +1,74 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
+import getYear from "date-fns/getYear";
+import { Context } from "../store/appContext";
+import CommentCard from "../component/commentCard";
+
 export const Game = () => {
+  const { store, actions } = useContext(Context);
+  const { user } = store;
+  const params = useParams();
+  const { gameId } = params;
+  const [gameData, setGameData] = useState(null);
+  const [myComment, setMyComment] = useState(null);
+  const [score, setScore] = useState(null);
+  const [content, setContent] = useState(null);
+  const token = localStorage.getItem("jwt-token");
+
+  const getGame = async () => {
+    const resp = await fetch(`${process.env.BACKEND_URL}/api/game/${gameId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await resp.json();
+    let comments;
+    if (user) {
+      comments = data.comments.filter((c) => c.user.id !== user.id);
+      const comment = data.comments.find((c) => c.user.id === user.id);
+      setMyComment(comment);
+      setContent(comment.content);
+      setScore(comment.score);
+    }
+    else comments = data.comments
+    setGameData({...data, comments});
+  };
+
+  const submit = async () => {
+    const resp = await fetch(`${process.env.BACKEND_URL}/api/comment`, {
+      method: "POST",
+      body: JSON.stringify({
+        content,
+        score,
+        user_id: user.id,
+        game_id: gameId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    console.log(resp.ok);
+    console.log(resp.status);
+    // console.log(resp.text());
+    const data = await resp.json();
+    console.log(data);
+  }
+
+  useEffect(() => {
+    getGame();
+  },[]);
   return (
     <div className="d-flex pt-3 marginPage">
       <div className="cover ps-3">
-        <h2 className="text-center">The Legend of Zelda <h6>(2017)</h6></h2>
+        <h2 className="text-center">{gameData?.title}
+          <h6>({gameData?.release_date && getYear(new Date(gameData.release_date))})</h6>
+        </h2>
         <img
           className="imageCover"
-          src="https://upload.wikimedia.org/wikipedia/en/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg"
+          src={gameData?.picture}
         ></img>
       </div>
       <div className="information">
@@ -24,29 +86,35 @@ export const Game = () => {
 
         <div className="container pt-3">
           <p>
-            The Legend of Zelda: Breath of the Wild es la nueva aventura de
-            acción de Nintendo para Wii U y Nintendo Switch que nos presenta el
-            título más ambicioso de la saga con un mundo abierto por explorar y
-            en el que realizar todo tipo de acciones como escalar además de
-            otras clásicas como nadar o montar a caballo.
+            {gameData?.description}
           </p>
         </div>
         <div className="ps-3">
           <div className="container commentBox pt-3 ">
             <div className="mb-3">
               <div className="pb-2">
-                <input type="number" min={1} max={10}></input>
+                <input
+                  type="number"
+                  min={1}
+                  max={10}
+                  value={score}
+                  onChange={(e) => setScore(e.target.value)}
+                />
               </div>
               <textarea
                 placeholder="Write Your Opinion About This Game"
                 className="form-control"
                 id="exampleFormControlTextarea1"
                 rows="3"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
               ></textarea>
               <div className="d-flex justify-content-end pt-1 pb-1">
                 <button
                   type="button"
                   className="btn btn-outline-success btn-sm"
+                  disabled={score === null}
+                  onClick={submit}
                 >
                   Send
                 </button>
@@ -54,6 +122,9 @@ export const Game = () => {
             </div>
           </div>
         </div>
+        {gameData && gameData.comments.map((comment) => (
+          <CommentCard comment={comment} />
+        ))}
       </div>
     </div>
   );
