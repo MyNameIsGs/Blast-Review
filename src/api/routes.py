@@ -62,14 +62,20 @@ def protected():
     return jsonify({"id": user.id, "email": user.email }), 200
 
 @api.route('/comment', methods=['POST'])
+@jwt_required()
 def create_comment():
 
     data = request.json
 
+    comment = Comment.query.filter_by(user_id=data['user_id']).first()
+    if comment is not None:
+        return jsonify({"msg": "This user already made a comment"}), 400
+
     comment = Comment(
                     content=data['content'],
                     user_id=data['user_id'], 
-                    game_id=data['game_id']
+                    game_id=data['game_id'],
+                    score=data['score'],
                 )
     db.session.add(comment)
     db.session.commit()
