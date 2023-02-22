@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import getYear from "date-fns/getYear";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Context } from "../store/appContext";
 import CommentCard from "../component/commentCard";
 
@@ -37,8 +39,9 @@ export const Game = () => {
   };
 
   const submit = async () => {
-    const resp = await fetch(`${process.env.BACKEND_URL}/api/comment`, {
-      method: "POST",
+    const isUpdating = myComment ? true : false;
+    const resp = await fetch(`${process.env.BACKEND_URL}/api/comment${isUpdating ? `/${myComment.id}` : ''}`, {
+      method: isUpdating ? "PUT" : "POST",
       body: JSON.stringify({
         content,
         score,
@@ -55,6 +58,17 @@ export const Game = () => {
     // console.log(resp.text());
     const data = await resp.json();
     console.log(data);
+    setMyComment(data.result);
+    toast.success(`Comment ${isUpdating ? 'updated' : 'published'} succesfully!`, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
   }
 
   useEffect(() => {
@@ -63,13 +77,15 @@ export const Game = () => {
   return (
     <div className="d-flex pt-3 marginPage">
       <div className="cover ps-3">
-        <h2 className="text-center">{gameData?.title}
-          <h6>({gameData?.release_date && getYear(new Date(gameData.release_date))})</h6>
+        <h2 className="text-center">
+          {gameData?.title}
+          <h6>
+            (
+            {gameData?.release_date && getYear(new Date(gameData.release_date))}
+            )
+          </h6>
         </h2>
-        <img
-          className="imageCover"
-          src={gameData?.picture}
-        ></img>
+        <img className="imageCover" src={gameData?.picture}></img>
       </div>
       <div className="information">
         <div className=" container d-flex ">
@@ -85,9 +101,7 @@ export const Game = () => {
         </div>
 
         <div className="container pt-3">
-          <p>
-            {gameData?.description}
-          </p>
+          <p>{gameData?.description}</p>
         </div>
         <div className="ps-3">
           <div className="container commentBox pt-3 ">
@@ -121,10 +135,21 @@ export const Game = () => {
               </div>
             </div>
           </div>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
         </div>
-        {gameData && gameData.comments.map((comment) => (
-          <CommentCard comment={comment} />
-        ))}
+        {gameData &&
+          gameData.comments.map((comment) => <CommentCard comment={comment} />)}
       </div>
     </div>
   );

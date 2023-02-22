@@ -7,7 +7,7 @@ export const Private = () => {
 
   return (
     <div className="text-center">
-      <h1>Hello there {store.user?.email}!</h1>
+      <h1>Hello there {store.user?.username}!</h1>
     </div>
   );
 };

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Comment, Game
+from api.models import db, User, Comment, Game, Tag
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
@@ -38,6 +38,35 @@ def register_user():
 
     return jsonify(response_body), 201
 
+@api.route('/user/<int:user_id>/tag/', methods=['PUT'])
+@jwt_required()
+def add_user_tags(user_id):
+
+    current_user_id = get_jwt_identity()
+    if current_user_id != user_id:
+        return jsonify({"msg": "You are not allowed to modify this user's information"}), 400
+    
+    data = request.json
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return jsonify({"msg": "User not found"}), 404
+    
+    tags = []
+    for tag in data['tags']:
+        item = Tag.query.filter_by(id=tag).first()
+        if item is None:
+            return jsonify({"msg": f"Tag {tag} not found"}), 404
+        tags.append(item)
+
+    user.tags = tags
+    db.session.commit()
+
+    response_body = {
+        'result': user.serialize()
+    }
+
+    return jsonify(response_body), 201
+
 @api.route("/token", methods=["POST"])
 def create_token():
     email = request.json.get("email", None)
@@ -59,7 +88,7 @@ def protected():
     current_user_id = get_jwt_identity()
     user = User.query.get(current_user_id)
     
-    return jsonify({"id": user.id, "email": user.email }), 200
+    return jsonify({**user.serialize()}), 200
 
 @api.route('/comment', methods=['POST'])
 @jwt_required()
@@ -86,6 +115,26 @@ def create_comment():
 
     return jsonify(response_body), 201
 
+@api.route('/comment/<int:comment_id>', methods=['PUT'])
+@jwt_required()
+def update_comment(comment_id):
+
+    data = request.json
+
+    comment = Comment.query.filter_by(id=comment_id, user_id=data['user_id']).first()
+    if comment is None:
+        return jsonify({"msg": "Comment not found"}), 404
+
+    comment.score = data['score']
+    comment.content = data['content']
+    db.session.commit()
+
+    response_body = {
+        'result': comment.serialize()
+    }
+
+    return jsonify(response_body), 200
+
 @api.route('/game/<int:game_id>', methods=['GET'])
 def get_single_game(game_id):
 
@@ -95,3 +144,10 @@ def get_single_game(game_id):
     comments = Comment.query.filter_by(game_id=game_id).all()
     
     return jsonify({  "comments": [{**comment.serialize()} for comment in comments], **game.serialize() })
+
+@api.route('/tags', methods=['GET'])
+def get_tags():
+
+    tags = Tag.query.all()
+    
+    return jsonify({  "result": [{**tag.serialize()} for tag in tags]})
