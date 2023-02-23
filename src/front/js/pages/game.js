@@ -89,14 +89,34 @@ export const Game = () => {
       </div>
       <div className="information">
         <div className=" container d-flex ">
-          <div className="pt-3 score casual">
-            <p className="text-center mb-0 mx-4"> Puntaje Casual 👶</p>
+          <div className="pt-3 score casual ">
+          <div className="pillCasual">
+            <div>
+              <img
+                src="https://i.ibb.co/ysH2hSt/Noob-Logo.png"
+                className="casualLogo"
+              ></img>
+            </div>
+            <div>
+              <p className="text-center mb-0 mx-4"> Puntaje Casual </p>
 
-            <p className="text-center mt-0"> 6/10</p>
+              <p className="text-center mt-0"> 64%</p>
+              </div>
+            </div>
           </div>
-          <div className="pt-3 score habitual">
-            <p className="text-center mb-0 mx-4"> Puntaje Habitual 💪</p>
-            <p className="text-center mt-0"> 9/10</p>
+          <div className="pt-3 score habitual ">
+            <div className="pillHabitual">
+              <div>
+                <img
+                  src="https://i.ibb.co/2WNrs7H/Pro-Logo.png"
+                  className="habitualLogo"
+                ></img>
+              </div>
+              <div>
+                <p className="text-center mb-0 mx-4 casualText"> Puntaje Habitual </p>
+                <p className="text-center mt-0 casualText"> 86%</p>
+              </div>
+            </div>
           </div>
         </div>
 
