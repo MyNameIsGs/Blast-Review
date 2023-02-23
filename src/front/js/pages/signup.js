@@ -9,7 +9,7 @@ export const Signup = () => {
 
   return (
     <div>
-      <div className="mt-5 w-50 m-auto">
+      <div className="mt-5 w-50 m-auto backgroundGame text-white p-3">
         <RegisterForm />
       </div>
     </div>

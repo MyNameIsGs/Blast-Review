@@ -10,7 +10,7 @@ export const Login = () => {
 
   return (
     <div>
-      <div className="mt-5 w-50 m-auto">
+      <div className="mt-5 p-3 w-50 m-auto backgroundGame text-white ">
         <LoginForm />
       </div>
     </div>
