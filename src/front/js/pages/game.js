@@ -76,19 +76,19 @@ export const Game = () => {
   },[]);
   return (
     <div className="d-flex pt-3 marginPage">
-      <div className="cover ps-3">
-        <h2 className="text-center">
+      <div className="cover p-3 text-center backgroundGame">
+        <h3 className="text-center text-white">
           {gameData?.title}
           <h6>
             (
             {gameData?.release_date && getYear(new Date(gameData.release_date))}
             )
           </h6>
-        </h2>
+        </h3>
         <img className="imageCover" src={gameData?.picture}></img>
       </div>
-      <div className="information">
-        <div className=" container d-flex ">
+      <div className="information backgroundGame ms-3 p-3 pe-5">
+        <div className="d-flex ">
           <div className="pt-3 score casual ">
           <div className="pillCasual">
             <div>
@@ -120,7 +120,7 @@ export const Game = () => {
           </div>
         </div>
 
-        <div className="container pt-3">
+        <div className="container pt-3 text-white">
           <p>{gameData?.description}</p>
         </div>
         <div className="ps-3">
@@ -168,9 +168,12 @@ export const Game = () => {
             theme="dark"
           />
         </div>
+          
+      </div>
+      <div class=" ms-3 p-3 backgroundGame">
         {gameData &&
           gameData.comments.map((comment) => <CommentCard comment={comment} />)}
-      </div>
+          </div>
     </div>
   );
 };

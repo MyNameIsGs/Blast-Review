@@ -11,12 +11,14 @@
 
 .cover {
   height: 480px;
+  width: 300px;
+  margin: 0;
 }
 
 .imageCover {
   object-fit: cover;
-  width: 300px;
-  height: 380px;
+  width: 250px;
+  height: 350px;
 }
 
 .score {
@@ -41,14 +43,16 @@
   width: 188px;
 }
 
+.pillCasual {
+  width: 188px;
+}
+
 .casualText {
   margin: 0px auto;
   text-align: center;
 }
 
-.pillCasual {
-  width: 188px;
-}
+
 
 body {
   background-image: url(https://i.ibb.co/b2Q0mRJ/Blast-Review.png);
@@ -90,3 +94,4 @@ body {
 .backgroundGame {
   background-color: #212529;
 }
+
