@@ -2,6 +2,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
+      token: null,
+      user: null,
+      isInitialized: false,
 			demo: [
 				{
 					title: "FIRST",
@@ -46,7 +49,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+      storeToken: (token) => {
+        setStore({ token });
+      },
+      storeUser: (user) => {
+        setStore({ user });
+      },
+      setInitialized: (isInitialized) => {
+        setStore({ isInitialized });
+      },
 		}
 	};
 };
