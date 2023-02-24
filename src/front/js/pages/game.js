@@ -5,6 +5,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Context } from "../store/appContext";
 import CommentCard from "../component/commentCard";
+import stars from "../component/starsRating";
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
 
 export const Game = () => {
   const { store, actions } = useContext(Context);
@@ -16,7 +19,18 @@ export const Game = () => {
   const [score, setScore] = useState(null);
   const [content, setContent] = useState(null);
   const token = localStorage.getItem("jwt-token");
+  const stars = document.querySelectorAll(".stars i");
 
+  stars.forEach((star, index1) => {
+     
+      star.addEventListener("click", () => {
+      
+        stars.forEach((star, index2) => {
+        
+          index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
+        });
+      });
+    });
   const getGame = async () => {
     const resp = await fetch(`${process.env.BACKEND_URL}/api/game/${gameId}`, {
       method: "GET",
@@ -123,17 +137,22 @@ export const Game = () => {
         <div className="container pt-3 text-white">
           <p>{gameData?.description}</p>
         </div>
+        
         <div className="ps-3">
           <div className="container commentBox pt-3 ">
             <div className="mb-3">
-              <div className="pb-2">
-                <input
-                  type="number"
-                  min={1}
-                  max={10}
-                  value={score}
-                  onChange={(e) => setScore(e.target.value)}
-                />
+
+              <div className="pb-2 stars" >
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
               </div>
               <textarea
                 placeholder="Write Your Opinion About This Game"

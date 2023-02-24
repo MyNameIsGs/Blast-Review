@@ -1,14 +1,19 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
-.commentBox {
-  background-color: #e6e6e6;
+/*backgrounds*/
+
+body {
+  background-image: url(https://i.ibb.co/b2Q0mRJ/Blast-Review.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.marginPage {
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
-.information {
-  max-width: 400px;
+.backgroundGame {
+  background-color: #212529;
 }
-
+/*cover*/
 .cover {
   height: 480px;
   width: 300px;
@@ -20,6 +25,32 @@
   width: 250px;
   height: 350px;
 }
+
+/*information*/
+
+.commentBox {
+  background-color: #e6e6e6;
+}
+
+.information {
+  max-width: 400px;
+}
+
+.commentBox {
+  border-radius: 10px;
+}
+
+/*navbar*/
+
+.navbar {
+  margin: 0px;
+}
+
+.logoBlast {
+  width: 160px;
+}
+
+/*score*/
 
 .score {
   margin: 0px auto;
@@ -52,26 +83,6 @@
   text-align: center;
 }
 
-
-
-body {
-  background-image: url(https://i.ibb.co/b2Q0mRJ/Blast-Review.png);
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-
-.commentBox {
-  border-radius: 10px;
-}
-
-.navbar {
-  margin: 0px;
-}
-
-.logoBlast {
-  width: 160px;
-}
-
 .habitualLogo {
   width: 100px;
   margin-left: 30px;
@@ -86,12 +97,14 @@ body {
   margin: 0px auto;
 }
 
-.marginPage {
-  margin-left: 100px;
-  margin-right: 100px;
-}
+/*Stars Rating*/
 
-.backgroundGame {
-  background-color: #212529;
+.stars i {
+  color: gray;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 2px
 }
-
+.stars i.active {
+  color: #9D00FF;
+}

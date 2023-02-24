@@ -11,7 +11,7 @@ const Login = () => {
   const { setUserContext } = useAuth();
   const userValues = {
     email: "",
-    password: "",
+    password: ""
   };
 
   const [result, setResult] = useState(null);
