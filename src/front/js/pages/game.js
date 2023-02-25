@@ -102,14 +102,10 @@ export const Game = () => {
   return (
     <div className="d-flex pt-3 marginPage">
       <div className="cover p-3 text-center backgroundGame">
-        <h3 className="text-center text-white">
-          {gameData?.title}
-          <h6>
-            (
-            {gameData?.release_date && getYear(new Date(gameData.release_date))}
-            )
-          </h6>
-        </h3>
+        <h3 className="text-center text-white">{gameData?.title}</h3>
+        <h6 className="text-center text-white">
+          ({gameData?.release_date && getYear(new Date(gameData.release_date))})
+        </h6>
         <img className="imageCover" src={gameData?.picture}></img>
       </div>
       <div className="information backgroundGame ms-3 p-3 pe-5">
@@ -122,7 +118,9 @@ export const Game = () => {
               ></img>
 
               <div>
-                <h2 className="text-center ms-2 mt-2 mb-0 me-3 pixelTitle">65%</h2>
+                <h2 className="text-center ms-2 mt-2 mb-0 me-3 pixelTitle">
+                  65%
+                </h2>
               </div>
             </div>
             <div className="mt-2">
@@ -131,8 +129,6 @@ export const Game = () => {
           </div>
           <div className="pt-2 score habitual">
             <div className="pillHabitual d-flex">
-              
-
               <div>
                 <h2 className="text-center mt-2 mb-0 ms-2 pixelTitle">95%</h2>
               </div>
@@ -141,11 +137,10 @@ export const Game = () => {
                 className="habitualLogo ms-1 mt-0 me-4 mb-0"
               ></img>
             </div>
-            
+
             <div className="mt-2">
               <p className="pixelText">Habitual Score</p>
             </div>
-            
           </div>
         </div>
 
@@ -210,7 +205,10 @@ export const Game = () => {
         {gameData &&
           gameData.comments.map((comment) => <CommentCard comment={comment} />)}
         {gameData?.comments.length === 0 && (
-          <div className="p-1 mb-2 bg-light text-center" style={{ width: '300px' }}>
+          <div
+            className="p-1 mb-2 bg-light text-center"
+            style={{ width: "300px" }}
+          >
             No comments yet
           </div>
         )}
