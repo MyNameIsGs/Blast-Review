@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
 /*backgrounds*/
 
 body {
@@ -40,6 +42,16 @@ body {
   border-radius: 10px;
 }
 
+.pixelText {
+  font-family: "Press Start 2P", cursive;
+  font-size: x-small;
+}
+
+.pixelTitle {
+  font-family: "Press Start 2P", cursive;
+  font-size: 20px;
+}
+
 /*navbar*/
 
 .navbar {
@@ -57,14 +69,14 @@ body {
 }
 
 .habitual {
-  background-color: #ffb321;
+  background-image: linear-gradient(to right, #ffa700, #ff4f00);
   border-start-end-radius: 40px;
   border-end-end-radius: 40px;
   text-align: center;
 }
 
 .casual {
-  background-color: #fae900;
+  background-image: linear-gradient(to right, #ffff00, #ffa700);
   border-end-start-radius: 40px;
   border-start-start-radius: 40px;
   text-align: center;
@@ -85,12 +97,11 @@ body {
 
 .habitualLogo {
   width: 100px;
-  margin-left: 30px;
+  height: 50px;
   margin: 0px auto;
 }
 
 .casualLogo {
-  margin-left: 30px;
   width: 80px;
   height: 40px;
   transform: rotateY(180deg);
@@ -103,67 +114,209 @@ body {
   color: gray;
   cursor: pointer;
   transition: color 0.2s ease;
-  padding: 2px
+  padding: 2px;
 
-}
 .stars i.active {
-  color: #9D00FF;
+  color: #9d00ff;
 }
 
 /*Tags*/
 
-
 .tagLook {
-  font-size: 15px;
-  
-  font-family: 'Trebuchet MS';
-  font-weight: bold;
-  width: auto
-    ;
+  font-size: 11.5px;
+
+  font-family: "Press Start 2P", cursive;
+
+  width: auto;
   text-align: center;
   display: inline-block;
-  border: .1em solid transparent;
-  padding: .1em .2em .2em;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin: .1em .015em;
-  border-radius: .7em;
+
+  border: 0.3em solid transparent;
+  padding: 0.1em 0.2em 0.2em;
+  padding-right: 12px;
+  padding-left: 12px;
+  margin: 0.1em 0.015em;
+  border-radius: 0.7em;
 }
-  .tagPills { 
-    text-transform: uppercase;
-    font-size:.8em; 
-    color: white;
-    text-shadow: 0em 0em .2em black; 
-  }
-  
-  .platformer2     { background-color: #a8a878; border-top-color: lighten(#a8a878,15%); border-bottom-color: darken(#a8a878,15%); }
-  .platformer3       { background-color: #C82000; border-top-color: lighten(#C82000,15%); border-bottom-color: darken(#C82000,15%); }
-  .fighting   { background-color: #94231d; border-top-color: lighten(#c03028,15%); border-bottom-color: darken(#c03028,15%); }
-  .roguelike      { background-color: #6890f0; border-top-color: lighten(#6890f0,15%); border-bottom-color: darken(#6890f0,15%); }
-  .shooter     { background-color: #a040a0; border-top-color: lighten(#a040a0,15%); border-bottom-color: darken(#a040a0,15%); }
-  .adventure   { background-color: #f8d030; border-top-color: lighten(#f8d030,15%); border-bottom-color: darken(#f8d030,15%); }
-  .action     { background-color: #e0c068; border-top: lighten(#e0c068,15%); border-bottom: darken(#e0c068,15%); }
-  .horror      { background-color: #78c850; border-top-color: lighten(#78c850,15%); border-bottom-color: darken(#78c850,15%); }
-  .rpg     { background-color: #a890f0; border-top-color: lighten(#a890f0,15%); border-bottom-color: darken(#a890f0,15%); }
-  .simulation        { background-color: #98d8d8; border-top-color: lighten(#98d8d8,15%); border-bottom-color: darken(#98d8d8,15%); }
-  .fps        { background-color: #a8b820; border-top-color: lighten(#a8b820,15%); border-bottom-color: darken(#a8b820,15%); }
-  .puzzle    { background-color: #f85888; border-top-color: lighten(#f85888,15%); border-bottom-color: darken(#f85888,15%); }
-  .beatEmUp       { background-color: #b8a038; border-top-color: lighten(#b8a038,15%); border-bottom-color: darken(#b8a038,15%); }
-  .metroidvania     { background-color: #7038f8; border-top-color: lighten(#7038f8,15%); border-bottom-color: darken(#7038f8,15%); }
-  .sports      { background-color: #705898; border-top-color: lighten(#705898,15%); border-bottom-color: darken(#705898,15%); }
-  .strategy       { background-color: #705848; border-top-color: lighten(#705848,15%); border-bottom-color: darken(#705848,15%); }
-  .mmo      { background-color: #b8b8d0; border-top-color: lighten(#b8b8d0,15%); border-bottom-color: darken(#b8b8d0,15%); }
-  .racing      { background-color: #ffb7fa; border-top-color: lighten(#ffb7fa,15%); border-bottom-color: darken(#ffb7fa,15%); }
-  .singlePlayer     { background-color: #5034ec; border-top-color: lighten(#ffb7fa,15%); border-bottom-color: darken(#ffb7fa,15%); }
-  .openWorld     { background-color: #00690e; border-top-color: lighten(#ffb7fa,15%); border-bottom-color: darken(#ffb7fa,15%); }
-.playstation      { background-color: #00439C; border-top-color: lighten(#00439C,15%); border-bottom-color: darken(#00439C,15%); }
- 
-  .nintendo      { background-color: #E20001; border-top-color: lighten(#E20001,15%); border-bottom-color: darken(#E20001,15%); }
-  
-  .xbox      { background-color: #077D07; border-top-color: lighten(#077D07,15%); border-bottom-color: darken(#077D07,15%); }
-  
-    .android     { background-color: #5DAB24; border-top-color: lighten(#5DAB24,15%); border-bottom-color: darken(#5DAB24,15%); }
-  
-    .ios      { background-color: #424242; border-top-color: lighten(#424242,15%); border-bottom-color: darken(#424242,15%); }
-  
-  
+.tagPills {
+  text-transform: uppercase;
+  font-size: 0.8em;
+  color: white;
+  text-shadow: 0em 0em 0.2em black;
+}
+
+.platformer2 {
+  background-color: #a8a878;
+  border-top-color: #c6c6a7;
+  border-bottom-color: #818153;
+}
+.platformer3 {
+  background-color: #c82000;
+  border-top-color: #ff3b16;
+  border-bottom-color: #7c1400;
+}
+.fighting {
+  background-color: #94231d;
+  border-top-color: #dc5f58;
+  border-bottom-color: #81201b;
+}
+.roguelike {
+  background-color: #6890f0;
+  border-top-color: #aec3f7;
+  border-bottom-color: #225de9;
+}
+.shooter {
+  background-color: #a040a0;
+  border-top-color: #c369c3;
+  border-bottom-color: #692a69;
+}
+.adventure {
+  background-color: #f8d030;
+  border-top-color: #fbe17a;
+  border-bottom-color: #d4ab07;
+}
+.action {
+  background-color: #e0c068;
+  border-top-color: #eddaa7;
+  border-bottom-color: #d1a42b;
+}
+.horror {
+  background-color: #78c850;
+  border-top-color: #a5da8a;
+  border-bottom-color: #549b31;
+}
+.rpg {
+  background-color: #a890f0;
+  border-top-color: #ddd3f9;
+  border-bottom-color: #734de7;
+}
+.simulation {
+  background-color: #98d8d8;
+  border-top-color: #cfeded;
+  border-bottom-color: #61c3c3;
+}
+.fps {
+  background-color: #a8b820;
+  border-top-color: #cfdf46;
+  border-bottom-color: #6d7715;
+}
+.puzzle {
+  background-color: #f85888;
+  border-top-color: #fba1bc;
+  border-bottom-color: #f50f54;
+}
+.beatEmUp {
+  background-color: #b8a038;
+  border-top-color: #d2bf6b;
+  border-bottom-color: #7d6d26;
+}
+.metroidvania {
+  background-color: #7038f8;
+  border-top-color: #a582fb;
+  border-bottom-color: #4608dc;
+}
+.sports {
+  background-color: #705898;
+  border-top-color: #9884b8;
+  border-bottom-color: #4c3c68;
+}
+.strategy {
+  background-color: #705848;
+  border-top-color: #9d7d67;
+  border-bottom-color: #41332a;
+}
+.mmo {
+  background-color: #b8b8d0;
+  border-top-color: #e6e6ee;
+  border-bottom-color: #8a8ab2;
+}
+.racing {
+  background-color: #ffb7fa;
+  border-top-color: #fff;
+  border-bottom-color: #ff6bf5;
+}
+
+.farming {
+  background-color: #497e76;
+  border-top-color: #6ba9a0;
+  border-bottom-color: #2d4e49;
+}
+.graphicNovel {
+  background-color: #3e5f8a;
+  border-top-color: #5e84b7;
+  border-bottom-color: #263b55;
+}
+.towerDefense {
+  background-color: #8f8f8f;
+  border-top-color: #b5b5b5;
+  border-bottom-color: #696969;
+}
+.hackAndSlash {
+  background-color: #705335;
+  border-top-color: #a4794e;
+  border-bottom-color: #3c2d1c;
+}
+.rythmGame {
+  background-color: #1f3a3d;
+  border-top-color: #396a70;
+  border-bottom-color: #050a0a;
+}
+.jrpg {
+  background-color: #287233;
+  border-top-color: #3cab4c;
+  border-bottom-color: #14391a;
+}
+.multiplayerCoop {
+  background-color: #755c48;
+  border-top-color: #a28268;
+  border-bottom-color: #46372b;
+}
+.multiplayerLocal {
+  background-color: #641c34;
+  border-top-color: #a02d53;
+  border-bottom-color: #280b15;
+}
+.multiplayerOnline {
+  background-color: #de4c8a;
+  border-top-color: #ea8db4;
+  border-bottom-color: #bb2263;
+}
+
+
+.singlePlayer {
+  background-color: #5034ec;
+  border-top-color: #8c7af3;
+  border-bottom-color: #2d12c1;
+}
+.openWorld {
+  background-color: #00690e;
+  border-top-color: #00b618;
+  border-bottom-color: #001d04;
+}
+
+.playstation {
+  background-color: #00439c;
+  border-top-color: #0064e9;
+  border-bottom-color: #002250;
+}
+.nintendo {
+  background-color: #e20001;
+  border-top-color: #ff3030;
+  border-bottom-color: #960001;
+}
+.xbox {
+  background-color: #077d07;
+  border-top-color: #0bc50b;
+  border-bottom-color: #033503;
+}
+.android {
+  background-color: #5dab24;
+  border-top-color: #82d844;
+  border-bottom-color: #3b6c17;
+}
+.ios {
+  background-color: #424242;
+  border-top-color: #686868;
+  border-bottom-color: #1c1c1c;
+}
+
