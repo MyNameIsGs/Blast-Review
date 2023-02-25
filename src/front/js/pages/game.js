@@ -135,6 +135,12 @@ export const Game = () => {
         </div>
 
         <div className="container pt-3 text-white">
+        <div class="tagLook action me-1"><span class="tagPills">Action</span></div>
+        <div class="tagLook adventure me-1"><span class="tagPills">Adventure</span></div>
+        <div class="tagLook openWorld me-1"><span class="tagPills">Open World</span></div>
+        <div class="tagLook singlePlayer me-1"><span class="tagPills">Single Player</span></div>
+        <div class="tagLook nintendo me-1"><span class="tagPills">Nintendo</span></div>
+
           <p>{gameData?.description}</p>
         </div>
         
