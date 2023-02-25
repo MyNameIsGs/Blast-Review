@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import getYear from "date-fns/getYear";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from 'react-toastify';
 import { Context } from "../store/appContext";
 import CommentCard from "../component/commentCard";
+import TagPill from "../component/tagPill";
 import stars from "../component/starsRating";
 <link
   rel="stylesheet"
@@ -19,12 +19,13 @@ export const Game = () => {
   const [gameData, setGameData] = useState(null);
   const [myComment, setMyComment] = useState(null);
   const [score, setScore] = useState(null);
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState('');
   const token = localStorage.getItem("jwt-token");
   const stars = document.querySelectorAll(".stars i");
 
   stars.forEach((star, index1) => {
     star.addEventListener("click", () => {
+      setScore(index1);
       stars.forEach((star, index2) => {
         index1 >= index2
           ? star.classList.add("active")
@@ -45,38 +46,40 @@ export const Game = () => {
     if (user) {
       comments = data.comments.filter((c) => c.user.id !== user.id);
       const comment = data.comments.find((c) => c.user.id === user.id);
-      setMyComment(comment);
-      setContent(comment.content);
-      setScore(comment.score);
-    } else comments = data.comments;
-    setGameData({ ...data, comments });
+      if(comment) {
+        setMyComment(comment);
+        setContent(comment.content);
+        setScore(comment.score);
+
+        const theStars = document.querySelectorAll(".stars i");
+        theStars.forEach((star, index1) => {
+     
+          comment.score - 1 >= index1 ? star.classList.add("active") : star.classList.remove("active");
+        });
+      }
+    }
+    else comments = data.comments
+    setGameData({...data, comments});
   };
 
   const submit = async () => {
     const isUpdating = myComment ? true : false;
-    const resp = await fetch(
-      `${process.env.BACKEND_URL}/api/comment${
-        isUpdating ? `/${myComment.id}` : ""
-      }`,
-      {
-        method: isUpdating ? "PUT" : "POST",
-        body: JSON.stringify({
-          content,
-          score,
-          user_id: user.id,
-          game_id: gameId,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
-    console.log(resp.ok);
-    console.log(resp.status);
-    // console.log(resp.text());
+    const resp = await fetch(`${process.env.BACKEND_URL}/api/comment${isUpdating ? `/${myComment.id}` : ''}`, {
+      method: isUpdating ? "PUT" : "POST",
+      body: JSON.stringify({
+        content,
+        score,
+        user_id: user.id,
+        game_id: gameId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+
     const data = await resp.json();
-    console.log(data);
+
     setMyComment(data.result);
     toast.success(
       `Comment ${isUpdating ? "updated" : "published"} succesfully!`,
@@ -147,20 +150,20 @@ export const Game = () => {
         </div>
 
         <div className="container pt-3 text-white">
-          <div class="tagLook action me-1">
-            <span class="tagPills">Action</span>
+          <div className="tagLook action me-1">
+            <span className="tagPills">Action</span>
           </div>
-          <div class="tagLook adventure me-1">
-            <span class="tagPills">Adventure</span>
+          <div className="tagLook adventure me-1">
+            <span className="tagPills">Adventure</span>
           </div>
-          <div class="tagLook openWorld me-1">
-            <span class="tagPills">Open World</span>
+          <div className="tagLook openWorld me-1">
+            <span className="tagPills">Open World</span>
           </div>
-          <div class="tagLook singlePlayer me-1">
-            <span class="tagPills">Single Player</span>
+          <div className="tagLook singlePlayer me-1">
+            <span className="tagPills">Single Player</span>
           </div>
-          <div class="tagLook nintendo me-1">
-            <span class="tagPills">Nintendo Switch</span>
+          <div className="tagLook nintendo me-1">
+            <span className="tagPills">Nintendo Switch</span>
           </div>
 
           <p>{gameData?.description}</p>
@@ -170,16 +173,16 @@ export const Game = () => {
           <div className="container commentBox pt-3 ">
             <div className="mb-3">
               <div className="pb-2 stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
               </div>
               <textarea
                 placeholder="Write Your Opinion About This Game"
@@ -201,23 +204,16 @@ export const Game = () => {
               </div>
             </div>
           </div>
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-          />
         </div>
       </div>
-      <div class=" ms-3 p-3 backgroundGame">
+      <div className=" ms-3 p-3 backgroundGame">
         {gameData &&
           gameData.comments.map((comment) => <CommentCard comment={comment} />)}
+        {gameData?.comments.length === 0 && (
+          <div className="p-1 mb-2 bg-light text-center" style={{ width: '300px' }}>
+            No comments yet
+          </div>
+        )}
       </div>
     </div>
   );

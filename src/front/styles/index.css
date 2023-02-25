@@ -115,7 +115,7 @@ body {
   cursor: pointer;
   transition: color 0.2s ease;
   padding: 2px;
-
+}
 .stars i.active {
   color: #9d00ff;
 }

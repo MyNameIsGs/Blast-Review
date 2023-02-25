@@ -142,6 +142,7 @@ def get_single_game(game_id):
     if game is None:
         return jsonify({"msg": "Game not found"}), 404
     comments = Comment.query.filter_by(game_id=game_id).all()
+    print(comments)
     
     return jsonify({  "comments": [{**comment.serialize()} for comment in comments], **game.serialize() })
 
