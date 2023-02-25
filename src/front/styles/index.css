@@ -115,7 +115,7 @@ body {
   cursor: pointer;
   transition: color 0.2s ease;
   padding: 2px;
-}
+
 .stars i.active {
   color: #9d00ff;
 }
@@ -130,6 +130,7 @@ body {
   width: auto;
   text-align: center;
   display: inline-block;
+
   border: 0.3em solid transparent;
   padding: 0.1em 0.2em 0.2em;
   padding-right: 12px;
@@ -318,3 +319,4 @@ body {
   border-top-color: #686868;
   border-bottom-color: #1c1c1c;
 }
+
