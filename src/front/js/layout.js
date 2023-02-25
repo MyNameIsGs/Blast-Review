@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 import ScrollToTop from "./component/scrollToTop";
 
 import { Context } from "./store/appContext";
@@ -17,6 +18,7 @@ import { Footer } from "./component/footer";
 import PageLoading from "./component/pageLoading";
 import useAuth from "./hooks/useAuth";
 import PrivateRoute from "./pages/privateRoute";
+import 'react-toastify/dist/ReactToastify.css';
 
 //create your first component
 const Layout = () => {
@@ -66,6 +68,18 @@ const Layout = () => {
             <Route element={<Game />} path="/game/:gameId" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
           <Footer />
         </ScrollToTop>
       </BrowserRouter>
