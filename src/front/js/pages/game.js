@@ -6,8 +6,10 @@ import { Context } from "../store/appContext";
 import CommentCard from "../component/commentCard";
 import TagPill from "../component/tagPill";
 import stars from "../component/starsRating";
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+/>;
 
 export const Game = () => {
   const { store, actions } = useContext(Context);
@@ -22,15 +24,15 @@ export const Game = () => {
   const stars = document.querySelectorAll(".stars i");
 
   stars.forEach((star, index1) => {
-     
-      star.addEventListener("click", () => {
-        setScore(index1 + 1);
-        stars.forEach((star, index2) => {
-        
-          index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
-        });
+    star.addEventListener("click", () => {
+      setScore(index1);
+      stars.forEach((star, index2) => {
+        index1 >= index2
+          ? star.classList.add("active")
+          : star.classList.remove("active");
       });
     });
+  });
   const getGame = async () => {
     const resp = await fetch(`${process.env.BACKEND_URL}/api/game/${gameId}`, {
       method: "GET",
@@ -79,21 +81,24 @@ export const Game = () => {
     const data = await resp.json();
 
     setMyComment(data.result);
-    toast.success(`Comment ${isUpdating ? 'updated' : 'published'} succesfully!`, {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      });
-  }
+    toast.success(
+      `Comment ${isUpdating ? "updated" : "published"} succesfully!`,
+      {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      }
+    );
+  };
 
   useEffect(() => {
     getGame();
-  },[]);
+  }, []);
   return (
     <div className="d-flex pt-3 marginPage">
       <div className="cover p-3 text-center backgroundGame">
@@ -109,65 +114,75 @@ export const Game = () => {
       </div>
       <div className="information backgroundGame ms-3 p-3 pe-5">
         <div className="d-flex ">
-          <div className="pt-3 score casual ">
-          <div className="pillCasual">
-            <div>
+          <div className="pt-2 score casual">
+            <div className="pillCasual d-flex">
               <img
                 src="https://i.ibb.co/ysH2hSt/Noob-Logo.png"
-                className="casualLogo"
+                className="casualLogo mt-2 ms-4 mb-0"
               ></img>
-            </div>
-            <div>
-              <p className="text-center mb-0 mx-4"> Puntaje Casual </p>
 
-              <p className="text-center mt-0"> 64%</p>
+              <div>
+                <h2 className="text-center ms-2 mt-2 mb-0 me-3 pixelTitle">65%</h2>
               </div>
+            </div>
+            <div className="mt-2">
+              <p className="pixelText">Casual Score</p>
             </div>
           </div>
-          <div className="pt-3 score habitual ">
-            <div className="pillHabitual">
+          <div className="pt-2 score habitual">
+            <div className="pillHabitual d-flex">
+              
+
               <div>
-                <img
-                  src="https://i.ibb.co/2WNrs7H/Pro-Logo.png"
-                  className="habitualLogo"
-                ></img>
+                <h2 className="text-center mt-2 mb-0 ms-2 pixelTitle">95%</h2>
               </div>
-              <div>
-                <p className="text-center mb-0 mx-4 casualText"> Puntaje Habitual </p>
-                <p className="text-center mt-0 casualText"> 86%</p>
-              </div>
+              <img
+                src="https://i.ibb.co/2WNrs7H/Pro-Logo.png"
+                className="habitualLogo ms-1 mt-0 me-4 mb-0"
+              ></img>
             </div>
+            
+            <div className="mt-2">
+              <p className="pixelText">Habitual Score</p>
+            </div>
+            
           </div>
         </div>
 
         <div className="container pt-3 text-white">
-        <TagPill title="Action" />
-        <TagPill title="Open World" />
-        <TagPill title="Single Player" />
-        <TagPill customColor="nintendo" title="Nintendo" />
-        <div class="tagLook adventure me-1"><span class="tagPills">Adventure</span></div>
-        <div class="tagLook openWorld me-1"><span class="tagPills">Open World</span></div>
-        <div class="tagLook singlePlayer me-1"><span class="tagPills">Single Player</span></div>
-        <div class="tagLook nintendo me-1"><span class="tagPills">Nintendo</span></div>
+          <div className="tagLook action me-1">
+            <span className="tagPills">Action</span>
+          </div>
+          <div className="tagLook adventure me-1">
+            <span className="tagPills">Adventure</span>
+          </div>
+          <div className="tagLook openWorld me-1">
+            <span className="tagPills">Open World</span>
+          </div>
+          <div className="tagLook singlePlayer me-1">
+            <span className="tagPills">Single Player</span>
+          </div>
+          <div className="tagLook nintendo me-1">
+            <span className="tagPills">Nintendo Switch</span>
+          </div>
 
           <p>{gameData?.description}</p>
         </div>
-        
+
         <div className="ps-3">
           <div className="container commentBox pt-3 ">
             <div className="mb-3">
-
-              <div className="pb-2 stars" >
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
+              <div className="pb-2 stars">
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
               </div>
               <textarea
                 placeholder="Write Your Opinion About This Game"
@@ -190,7 +205,6 @@ export const Game = () => {
             </div>
           </div>
         </div>
-          
       </div>
       <div className=" ms-3 p-3 backgroundGame">
         {gameData &&
