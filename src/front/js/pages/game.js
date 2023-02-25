@@ -5,6 +5,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Context } from "../store/appContext";
 import CommentCard from "../component/commentCard";
+import stars from "../component/starsRating";
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
 
 export const Game = () => {
   const { store, actions } = useContext(Context);
@@ -16,7 +19,18 @@ export const Game = () => {
   const [score, setScore] = useState(null);
   const [content, setContent] = useState(null);
   const token = localStorage.getItem("jwt-token");
+  const stars = document.querySelectorAll(".stars i");
 
+  stars.forEach((star, index1) => {
+     
+      star.addEventListener("click", () => {
+      
+        stars.forEach((star, index2) => {
+        
+          index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
+        });
+      });
+    });
   const getGame = async () => {
     const resp = await fetch(`${process.env.BACKEND_URL}/api/game/${gameId}`, {
       method: "GET",
@@ -76,19 +90,19 @@ export const Game = () => {
   },[]);
   return (
     <div className="d-flex pt-3 marginPage">
-      <div className="cover ps-3">
-        <h2 className="text-center">
+      <div className="cover p-3 text-center backgroundGame">
+        <h3 className="text-center text-white">
           {gameData?.title}
           <h6>
             (
             {gameData?.release_date && getYear(new Date(gameData.release_date))}
             )
           </h6>
-        </h2>
+        </h3>
         <img className="imageCover" src={gameData?.picture}></img>
       </div>
-      <div className="information">
-        <div className=" container d-flex ">
+      <div className="information backgroundGame ms-3 p-3 pe-5">
+        <div className="d-flex ">
           <div className="pt-3 score casual ">
           <div className="pillCasual">
             <div>
@@ -120,20 +134,31 @@ export const Game = () => {
           </div>
         </div>
 
-        <div className="container pt-3">
+        <div className="container pt-3 text-white">
+        <div class="tagLook action me-1"><span class="tagPills">Action</span></div>
+        <div class="tagLook adventure me-1"><span class="tagPills">Adventure</span></div>
+        <div class="tagLook openWorld me-1"><span class="tagPills">Open World</span></div>
+        <div class="tagLook singlePlayer me-1"><span class="tagPills">Single Player</span></div>
+        <div class="tagLook nintendo me-1"><span class="tagPills">Nintendo</span></div>
+
           <p>{gameData?.description}</p>
         </div>
+        
         <div className="ps-3">
           <div className="container commentBox pt-3 ">
             <div className="mb-3">
-              <div className="pb-2">
-                <input
-                  type="number"
-                  min={1}
-                  max={10}
-                  value={score}
-                  onChange={(e) => setScore(e.target.value)}
-                />
+
+              <div className="pb-2 stars" >
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
               </div>
               <textarea
                 placeholder="Write Your Opinion About This Game"
@@ -168,9 +193,12 @@ export const Game = () => {
             theme="dark"
           />
         </div>
+          
+      </div>
+      <div class=" ms-3 p-3 backgroundGame">
         {gameData &&
           gameData.comments.map((comment) => <CommentCard comment={comment} />)}
-      </div>
+          </div>
     </div>
   );
 };
