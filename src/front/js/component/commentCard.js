@@ -5,7 +5,6 @@ const CommentCard = ({ comment }) => {
   return (
     <div className="p-1 mb-2 bg-light" style={{ width: '300px' }}>
       <div className="comment-header d-flex justify-content-between">
-        {/* <p class="fs-5">{comment.user.username}</p> */}
         <h6>{comment.user.username}</h6>
         <h6>{format(new Date(comment.created), 'MM/dd/yyyy')}</h6>
       </div>
