@@ -1,14 +1,19 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
-.commentBox {
-  background-color: #e6e6e6;
+/*backgrounds*/
+
+body {
+  background-image: url(https://i.ibb.co/b2Q0mRJ/Blast-Review.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.marginPage {
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
-.information {
-  max-width: 400px;
+.backgroundGame {
+  background-color: #212529;
 }
-
+/*cover*/
 .cover {
   height: 480px;
   width: 300px;
@@ -20,6 +25,32 @@
   width: 250px;
   height: 350px;
 }
+
+/*information*/
+
+.commentBox {
+  background-color: #e6e6e6;
+}
+
+.information {
+  max-width: 400px;
+}
+
+.commentBox {
+  border-radius: 10px;
+}
+
+/*navbar*/
+
+.navbar {
+  margin: 0px;
+}
+
+.logoBlast {
+  width: 160px;
+}
+
+/*score*/
 
 .score {
   margin: 0px auto;
@@ -52,26 +83,6 @@
   text-align: center;
 }
 
-
-
-body {
-  background-image: url(https://i.ibb.co/b2Q0mRJ/Blast-Review.png);
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-
-.commentBox {
-  border-radius: 10px;
-}
-
-.navbar {
-  margin: 0px;
-}
-
-.logoBlast {
-  width: 160px;
-}
-
 .habitualLogo {
   width: 100px;
   margin-left: 30px;
@@ -86,12 +97,74 @@ body {
   margin: 0px auto;
 }
 
-.marginPage {
-  margin-left: 100px;
-  margin-right: 100px;
+/*Stars Rating*/
+
+.stars i {
+  color: gray;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 2px
+}
+.stars i.active {
+  color: #9D00FF;
 }
 
-.backgroundGame {
-  background-color: #212529;
+/*Tags*/
+
+
+.tagLook {
+  font-size: 15px;
+  
+  font-family: 'Trebuchet MS';
+  font-weight: bold;
+  width: auto
+    ;
+  text-align: center;
+  display: inline-block;
+  border: .1em solid transparent;
+  padding: .1em .2em .2em;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin: .1em .015em;
+  border-radius: .7em;
 }
+  .tagPills { 
+    text-transform: uppercase;
+    font-size:.8em; 
+    color: white;
+    text-shadow: 0em 0em .2em black; 
+  }
+  
+  .platformer2     { background-color: #a8a878; border-top-color: lighten(#a8a878,15%); border-bottom-color: darken(#a8a878,15%); }
+  .platformer3       { background-color: #C82000; border-top-color: lighten(#C82000,15%); border-bottom-color: darken(#C82000,15%); }
+  .fighting   { background-color: #94231d; border-top-color: lighten(#c03028,15%); border-bottom-color: darken(#c03028,15%); }
+  .roguelike      { background-color: #6890f0; border-top-color: lighten(#6890f0,15%); border-bottom-color: darken(#6890f0,15%); }
+  .shooter     { background-color: #a040a0; border-top-color: lighten(#a040a0,15%); border-bottom-color: darken(#a040a0,15%); }
+  .adventure   { background-color: #f8d030; border-top-color: lighten(#f8d030,15%); border-bottom-color: darken(#f8d030,15%); }
+  .action     { background-color: #e0c068; border-top: lighten(#e0c068,15%); border-bottom: darken(#e0c068,15%); }
+  .horror      { background-color: #78c850; border-top-color: lighten(#78c850,15%); border-bottom-color: darken(#78c850,15%); }
+  .rpg     { background-color: #a890f0; border-top-color: lighten(#a890f0,15%); border-bottom-color: darken(#a890f0,15%); }
+  .simulation        { background-color: #98d8d8; border-top-color: lighten(#98d8d8,15%); border-bottom-color: darken(#98d8d8,15%); }
+  .fps        { background-color: #a8b820; border-top-color: lighten(#a8b820,15%); border-bottom-color: darken(#a8b820,15%); }
+  .puzzle    { background-color: #f85888; border-top-color: lighten(#f85888,15%); border-bottom-color: darken(#f85888,15%); }
+  .beatEmUp       { background-color: #b8a038; border-top-color: lighten(#b8a038,15%); border-bottom-color: darken(#b8a038,15%); }
+  .metroidvania     { background-color: #7038f8; border-top-color: lighten(#7038f8,15%); border-bottom-color: darken(#7038f8,15%); }
+  .sports      { background-color: #705898; border-top-color: lighten(#705898,15%); border-bottom-color: darken(#705898,15%); }
+  .strategy       { background-color: #705848; border-top-color: lighten(#705848,15%); border-bottom-color: darken(#705848,15%); }
+  .mmo      { background-color: #b8b8d0; border-top-color: lighten(#b8b8d0,15%); border-bottom-color: darken(#b8b8d0,15%); }
+  .racing      { background-color: #ffb7fa; border-top-color: lighten(#ffb7fa,15%); border-bottom-color: darken(#ffb7fa,15%); }
+  .singlePlayer     { background-color: #5034ec; border-top-color: lighten(#ffb7fa,15%); border-bottom-color: darken(#ffb7fa,15%); }
+  .openWorld     { background-color: #00690e; border-top-color: lighten(#ffb7fa,15%); border-bottom-color: darken(#ffb7fa,15%); }
+.playstation      { background-color: #00439C; border-top-color: lighten(#00439C,15%); border-bottom-color: darken(#00439C,15%); }
+ 
+  .nintendo      { background-color: #E20001; border-top-color: lighten(#E20001,15%); border-bottom-color: darken(#E20001,15%); }
+  
+  .xbox      { background-color: #077D07; border-top-color: lighten(#077D07,15%); border-bottom-color: darken(#077D07,15%); }
+  
+    .android     { background-color: #5DAB24; border-top-color: lighten(#5DAB24,15%); border-bottom-color: darken(#5DAB24,15%); }
+  
+    .ios      { background-color: #424242; border-top-color: lighten(#424242,15%); border-bottom-color: darken(#424242,15%); }
+  
+  
+
 
