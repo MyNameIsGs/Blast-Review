@@ -142,9 +142,30 @@ def get_single_game(game_id):
     if game is None:
         return jsonify({"msg": "Game not found"}), 404
     comments = Comment.query.filter_by(game_id=game_id).all()
-    print(comments)
-    
-    return jsonify({  "comments": [{**comment.serialize()} for comment in comments], **game.serialize() })
+    comments_serialized = [{**comment.serialize()} for comment in comments]
+    gameSerialized = game.serialize()
+
+    gameTags = [tag['id'] for tag in gameSerialized['tags']]
+
+    casual_comments_score = []
+    habitual_comments_score = []
+    for comment in comments_serialized:
+        userTags = [tag['id'] for tag in comment['user']['tags']]
+
+        if any(tag in userTags for tag in gameTags):
+            habitual_comments_score.append(comment['score'])
+        else:
+            casual_comments_score.append(comment['score'])
+
+    casual_score = round((sum(casual_comments_score)/len(casual_comments_score)) * 10)
+    habitual_score = round((sum(habitual_comments_score)/len(habitual_comments_score)) * 10)
+    response_body = {  
+        "comments": comments_serialized, 
+        "casual_score": casual_score,
+        "habitual_score": habitual_score,
+        **gameSerialized 
+    }
+    return jsonify(response_body)
 
 @api.route('/tags', methods=['GET'])
 def get_tags():
