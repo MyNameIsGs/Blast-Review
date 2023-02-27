@@ -141,6 +141,7 @@ export const Game = () => {
             <div className="mt-2">
               <p className="pixelText">Habitual Score</p>
             </div>
+            
           </div>
         </div>
 
