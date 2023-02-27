@@ -117,12 +117,12 @@ export const Private = () => {
     <div className="text-center">
       <h1>Hello there {user?.username}!</h1>
       <h3>Select your interests</h3>
-      <div className="m-0 text-center">
-        <div className="d-flex m-0">
+      <div>
+        <div className="container d-flex">
           <div>
             <h4>All our tags</h4>
-            <div className="w-25 m-auto">
-              <div className="rounded bg-dark p-3 d-flex justify-content-evenly flex-wrap tagTabs">
+            <div className="w-25 m-auto tabTags">
+              <div className="rounded bg-dark p-3 d-flex justify-content-evenly flex-wrap">
                 {tags.map(
                   (tag, i) =>
                     !tag.selected && (
@@ -137,10 +137,10 @@ export const Private = () => {
               </div>
             </div>
           </div>
-          <div className="me-5 userTags">
+          <div>
             <h4>Your tags</h4>
-            <div className="w-25 m-auto">
-              <div className="rounded bg-dark p-3  justify-content-evenly flex-wrap tagTabs ">
+            <div className="w-25 m-auto tabTags">
+              <div className="rounded bg-dark p-3 d-flex justify-content-evenly flex-wrap">
                 {tags.map(
                   (tag, i) =>
                     tag.selected && (

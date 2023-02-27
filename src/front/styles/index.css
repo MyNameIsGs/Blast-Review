@@ -1,11 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
+
+
 /*backgrounds*/
 
 body {
   background-image: url(https://i.ibb.co/b2Q0mRJ/Blast-Review.png);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
+  background-position: center 120px;
 }
 .marginPage {
   margin-left: 100px;
@@ -52,6 +55,16 @@ body {
   font-size: 20px;
 }
 
+.pixelText {
+  font-family: "Press Start 2P", cursive;
+  font-size: x-small;
+}
+
+.pixelTitle {
+  font-family: "Press Start 2P", cursive;
+  font-size: 20px;
+}
+
 /*navbar*/
 
 .navbar {
@@ -70,12 +83,14 @@ body {
 
 .habitual {
   background-image: linear-gradient(to right, #ffa700, #ff4f00);
+  background-image: linear-gradient(to right, #ffa700, #ff4f00);
   border-start-end-radius: 40px;
   border-end-end-radius: 40px;
   text-align: center;
 }
 
 .casual {
+  background-image: linear-gradient(to right, #ffff00, #ffa700);
   background-image: linear-gradient(to right, #ffff00, #ffa700);
   border-end-start-radius: 40px;
   border-start-start-radius: 40px;
@@ -98,6 +113,7 @@ body {
 .habitualLogo {
   width: 100px;
   height: 50px;
+  height: 50px;
   margin: 0px auto;
 }
 
@@ -115,6 +131,7 @@ body {
   cursor: pointer;
   transition: color 0.2s ease;
   padding: 2px;
+  padding: 2px;
 }
 .stars i.active {
   color: #9d00ff;
@@ -130,7 +147,6 @@ body {
   width: auto;
   text-align: center;
   display: inline-block;
-
   border: 0.3em solid transparent;
   padding: 0.1em 0.2em 0.2em;
   padding-right: 12px;
@@ -319,11 +335,78 @@ body {
   border-top-color: #686868;
   border-bottom-color: #1c1c1c;
 }
+
 .pc{
   
-    background-color: #ff4f00;
-    border-top-color: #ff844d;
-    border-bottom-color: #b33700;
- 
-  
+  background-color: #ff4f00;
+  border-top-color: #ff844d;
+  border-bottom-color: #b33700;
+
+
+}
+
+.tabTags{
+  min-width: 400px;
+}
+
+/* Principal Game */
+
+.spaceMargin{
+  width: 95%;
+  margin: auto;
+  height: fit-content;
+}
+
+.principalGame {
+  font-size: 14px;
+  min-height:30.62em;
+  color: white;
+  background: linear-gradient(rgba(0, 0, 0, .50)0%, rgba(0, 0, 0, .50) 100% ),url(https://cdn.videogamesblogger.com/wp-content/uploads/2016/06/the-legend-of-zelda-breath-of-the-wild-wide-art.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 2.12em;
+  display: flex;
+  align-items: end
+}
+
+.principalGame .spaceMargin{
+  margin-top: 0;
+  margin-bottom: 4.25em;
+  margin-left:4.25em;
+}
+
+.principalGame .principalGameTitle{
+  font-weight: 600;
+  font-size:2.5em;
+  margin-bottom:0.4em;
+}
+.principalGame .principalGameButton{
+  background:rgba(0, 0, 0, .50);
+  border:none;
+  border-radius: 0.31em;
+  padding: 0.93em 1.87em;
+  color: white;
+  margin-right: 1.25em;
+  cursor: pointer;
+  transition: .3s ease all;
+  font-size: 0.8em;
+
+}
+
+.principalGame .description{
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 1.75em;
+  max-width:50%;
+  margin-bottom: 1.25em;
+}
+
+.principalGame .principalGameButton:hover{
+  background: white;
+  color: black;
+}
+
+.principalGame .principalGameButton i{
+  margin-right: 0.5em;
 }
