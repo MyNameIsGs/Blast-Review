@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { Context } from "../store/appContext";
 import TagPill from "../component/tagPill";
 import "../../styles/home.css";
@@ -28,7 +28,9 @@ export const Private = () => {
         selected: user.tags.some((userTag) => userTag.id === tag.id),
       };
     });
-    const initialTags = filteredTags.map((t) => { return { ...t } });
+    const initialTags = filteredTags.map((t) => {
+      return { ...t };
+    });
     setInitial([...initialTags]);
     setTags([...filteredTags]);
   };
@@ -47,16 +49,19 @@ export const Private = () => {
   const handleSubmit = async () => {
     try {
       setSubmitting(true);
-      const resp = await fetch(`${process.env.BACKEND_URL}/api/user/${user.id}/tag`, {
-        method: "PUT",
-        body: JSON.stringify({
-          tags: tags.filter((t) => t.selected).map((t) => t.id)
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
+      const resp = await fetch(
+        `${process.env.BACKEND_URL}/api/user/${user.id}/tag`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            tags: tags.filter((t) => t.selected).map((t) => t.id),
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
       console.log(resp.ok);
       console.log(resp.status);
 
@@ -73,10 +78,12 @@ export const Private = () => {
           draggable: true,
           progress: undefined,
           theme: "dark",
-          });
+        });
 
         actions.storeUser(data.result);
-        const initialTags = tags.map((t) => { return { ...t } });
+        const initialTags = tags.map((t) => {
+          return { ...t };
+        });
         setInitial([...initialTags]);
       } else {
         toast.error(data.msg, {
@@ -88,7 +95,7 @@ export const Private = () => {
           draggable: true,
           progress: undefined,
           theme: "dark",
-          });
+        });
       }
     } catch (e) {
       console.log(e);
@@ -101,47 +108,65 @@ export const Private = () => {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       setSubmitting(false);
     }
-  }
+  };
 
   return (
     <div className="text-center">
       <h1>Hello there {user?.username}!</h1>
       <h3>Select your interests</h3>
-      <div>
-        <h4>All our tags</h4>
-        <div className="w-25 m-auto">
-          <div className="rounded bg-light p-3 d-flex justify-content-evenly flex-wrap">
-            {tags.map((tag, i) => !tag.selected && (
-              <TagPill
-                key={`${tag.id}-${tag.title}`}
-                title={tag.title}
-                onClick={() => handelSelect(tag, i)}
-                style={{ cursor: 'pointer' }}
-              />
-            ))}
+      <div className="m-0 text-center">
+        <div className="d-flex m-0">
+          <div>
+            <h4>All our tags</h4>
+            <div className="w-25 m-auto">
+              <div className="rounded bg-dark p-3 d-flex justify-content-evenly flex-wrap tagTabs">
+                {tags.map(
+                  (tag, i) =>
+                    !tag.selected && (
+                      <TagPill
+                        key={`${tag.id}-${tag.title}`}
+                        title={tag.title}
+                        onClick={() => handelSelect(tag, i)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    )
+                )}
+              </div>
+            </div>
           </div>
-        </div>
-        <h4>Your tags</h4>
-        <div className="w-25 m-auto">
-          <div className="rounded bg-light p-3 d-flex justify-content-evenly flex-wrap">
-            {tags.map((tag, i) => tag.selected && (
-              <TagPill
-                key={`${tag.id}-${tag.title}`}
-                title={tag.title}
-                onClick={() => handelSelect(tag, i)}
-                style={{ cursor: 'pointer' }}
-              />
-            ))}
+          <div className="me-5 userTags">
+            <h4>Your tags</h4>
+            <div className="w-25 m-auto">
+              <div className="rounded bg-dark p-3  justify-content-evenly flex-wrap tagTabs ">
+                {tags.map(
+                  (tag, i) =>
+                    tag.selected && (
+                      <TagPill
+                        key={`${tag.id}-${tag.title}`}
+                        title={tag.title}
+                        onClick={() => handelSelect(tag, i)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    )
+                )}
+              </div>
+            </div>
           </div>
         </div>
         <div className="w-25 m-auto d-flex mt-2 justify-content-end">
           <button
             type="button"
             className="btn btn-secondary btn-sm"
-            onClick={() => setTags(initial.map((t) => { return { ...t } }))}
+            onClick={() =>
+              setTags(
+                initial.map((t) => {
+                  return { ...t };
+                })
+              )
+            }
             disabled={submitting}
           >
             Undo
