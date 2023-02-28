@@ -180,3 +180,10 @@ def get_tags():
     tags = Tag.query.all()
     
     return jsonify({  "result": [{**tag.serialize()} for tag in tags]})
+
+@api.route('/game', methods=['GET'])
+def get_games():
+
+    games = Game.query.all()
+    
+    return jsonify({  "result": [{**game.serialize()} for game in games]})
