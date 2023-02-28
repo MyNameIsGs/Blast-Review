@@ -1,3 +1,4 @@
+import enum
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 
@@ -57,6 +58,7 @@ class Game(db.Model):
             "title": self.title,
             "description": self.description,
             "picture": self.picture,
+            "banner": self.banner,
             "author": self.author,
             "company": self.company,
             "release_date": self.release_date,
@@ -69,6 +71,7 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), unique=False, nullable=False)
     description = db.Column(db.String(200), unique=False, nullable=True)
+    is_console = db.Column(db.Boolean(), unique=False, nullable=True, default=False)
 
     def __repr__(self):
         return f'<Tag {self.title}>'
@@ -78,6 +81,7 @@ class Tag(db.Model):
             "id": self.id,
             "title": self.title,
             "description": self.description,
+            "is_console": self.is_console,
         }
 
 class Comment(db.Model):

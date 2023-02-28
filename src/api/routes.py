@@ -9,6 +9,25 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 api = Blueprint('api', __name__)
 
 
+def calculate_score(comments_serialized, gameSerialized):
+
+    gameTags = [tag['id'] for tag in gameSerialized['tags'] if not tag['is_console']]
+
+    casual_comments_score = []
+    habitual_comments_score = []
+    for comment in comments_serialized:
+        userTags = [tag['id'] for tag in comment['user']['tags'] if not tag['is_console']]
+
+        if len(userTags) > 2 and any(tag in userTags for tag in gameTags):
+            habitual_comments_score.append(comment['score'])
+        else:
+            casual_comments_score.append(comment['score'])
+
+    casual_score = round((sum(casual_comments_score)/len(casual_comments_score)) * 10) if len(casual_comments_score) > 0 else None
+    habitual_score = round((sum(habitual_comments_score)/len(habitual_comments_score)) * 10) if len(habitual_comments_score) > 0 else None
+
+    return { 'casual_score': casual_score, 'habitual_score': habitual_score, }
+
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
 
@@ -145,24 +164,12 @@ def get_single_game(game_id):
     comments_serialized = [{**comment.serialize()} for comment in comments]
     gameSerialized = game.serialize()
 
-    gameTags = [tag['id'] for tag in gameSerialized['tags']]
+    score = calculate_score(comments_serialized, gameSerialized)
 
-    casual_comments_score = []
-    habitual_comments_score = []
-    for comment in comments_serialized:
-        userTags = [tag['id'] for tag in comment['user']['tags']]
-
-        if any(tag in userTags for tag in gameTags):
-            habitual_comments_score.append(comment['score'])
-        else:
-            casual_comments_score.append(comment['score'])
-
-    casual_score = round((sum(casual_comments_score)/len(casual_comments_score)) * 10) if len(casual_comments_score) > 0 else None
-    habitual_score = round((sum(habitual_comments_score)/len(habitual_comments_score)) * 10) if len(habitual_comments_score) > 0 else None
     response_body = {  
         "comments": comments_serialized, 
-        "casual_score": casual_score,
-        "habitual_score": habitual_score,
+        "casual_score": score['casual_score'],
+        "habitual_score": score['habitual_score'],
         **gameSerialized 
     }
     return jsonify(response_body)
