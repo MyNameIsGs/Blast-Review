@@ -157,8 +157,8 @@ def get_single_game(game_id):
         else:
             casual_comments_score.append(comment['score'])
 
-    casual_score = round((sum(casual_comments_score)/len(casual_comments_score)) * 10)
-    habitual_score = round((sum(habitual_comments_score)/len(habitual_comments_score)) * 10)
+    casual_score = round((sum(casual_comments_score)/len(casual_comments_score)) * 10) if len(casual_comments_score) > 0 else None
+    habitual_score = round((sum(habitual_comments_score)/len(habitual_comments_score)) * 10) if len(habitual_comments_score) > 0 else None
     response_body = {  
         "comments": comments_serialized, 
         "casual_score": casual_score,

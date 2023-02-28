@@ -25,7 +25,7 @@ export const Game = () => {
 
   stars.forEach((star, index1) => {
     star.addEventListener("click", () => {
-      setScore(index1);
+      setScore(index1 + 1);
       stars.forEach((star, index2) => {
         index1 >= index2
           ? star.classList.add("active")
@@ -119,7 +119,7 @@ export const Game = () => {
 
               <div>
                 <h2 className="text-center ms-2 mt-2 mb-0 me-3 pixelTitle">
-                  65%
+                  {gameData?.casual_score ? `${gameData.casual_score}%` : ''}
                 </h2>
               </div>
             </div>
@@ -130,7 +130,9 @@ export const Game = () => {
           <div className="pt-2 score habitual">
             <div className="pillHabitual d-flex">
               <div>
-                <h2 className="text-center mt-2 mb-0 ms-2 pixelTitle">95%</h2>
+                <h2 className="text-center mt-2 mb-0 ms-2 pixelTitle">
+                  {gameData?.habitual_score ? `${gameData.habitual_score}%` : ''}
+                </h2>
               </div>
               <img
                 src="https://i.ibb.co/2WNrs7H/Pro-Logo.png"

@@ -39,8 +39,9 @@ class User(db.Model):
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), unique=False, nullable=False)
-    description = db.Column(db.String(400), unique=False, nullable=True)
-    picture = db.Column(db.String(200), unique=False, nullable=True)
+    description = db.Column(db.String(), unique=False, nullable=True)
+    picture = db.Column(db.String(), unique=False, nullable=True)
+    banner = db.Column(db.String(), unique=False, nullable=True)
     release_date = db.Column(db.DateTime(), unique=False, nullable=True)
     author = db.Column(db.String(80), unique=False, nullable=True)
     company = db.Column(db.String(80), unique=False, nullable=True)
