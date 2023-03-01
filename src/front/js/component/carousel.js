@@ -1,8 +1,8 @@
 const fila = document.querySelector(".principalContainer");
 const videogames = document.querySelectorAll(".videoGame");
 
-const leftArrow = documen.getElementById("leftArrow");
-const rightArrow = documen.getElementById("rightArrow");
+const leftArrow = document.getElementById("leftArrow");
+const rightArrow = document.getElementById("rightArrow");
 
 /*Event listener Arrows */
 

@@ -72,6 +72,7 @@ class Tag(db.Model):
     title = db.Column(db.String(80), unique=False, nullable=False)
     description = db.Column(db.String(200), unique=False, nullable=True)
     is_console = db.Column(db.Boolean(), unique=False, nullable=True, default=False)
+    class_style = db.Column(db.String(80), unique=False, nullable=True)
 
     def __repr__(self):
         return f'<Tag {self.title}>'
@@ -82,6 +83,7 @@ class Tag(db.Model):
             "title": self.title,
             "description": self.description,
             "is_console": self.is_console,
+            "class_style": self.class_style,
         }
 
 class Comment(db.Model):

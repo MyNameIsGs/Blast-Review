@@ -174,6 +174,29 @@ def get_single_game(game_id):
     }
     return jsonify(response_body)
 
+@api.route('/maingame/', methods=['GET'])
+def get_main_game():
+
+    games = Game.query.all()
+    games = [{**game.serialize()} for game in games]
+    
+    for game in games:
+
+        comments = Comment.query.filter_by(game_id=game['id']).all()
+        comments_serialized = [{**comment.serialize()} for comment in comments]
+
+        score = calculate_score(comments_serialized, game)
+        game["casual_score"] = score['casual_score'] if score['casual_score'] is not None else 0
+        game["habitual_score"] = score['habitual_score'] if score['habitual_score'] is not None else 0
+
+    games = sorted(games, key=lambda d: d['habitual_score'], reverse=True) 
+
+
+    response_body = {  
+        **games[0] 
+    }
+    return jsonify(response_body)
+
 @api.route('/tags', methods=['GET'])
 def get_tags():
 
@@ -184,6 +207,13 @@ def get_tags():
 @api.route('/game', methods=['GET'])
 def get_games():
 
-    games = Game.query.all()
+    like = request.args.get('like')
+    print('like')
+    print(like)
+
+    if like is not None:
+        games = Game.query.filter(Game.title.match(f"%{like}%")).all()
+    else:
+        games = Game.query.all()
     
     return jsonify({  "result": [{**game.serialize()} for game in games]})

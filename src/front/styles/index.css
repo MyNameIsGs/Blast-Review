@@ -355,8 +355,8 @@ body {
   font-size: 14px;
   min-height: 30.62em;
   color: white;
-  background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%),
-    url(https://cdn.videogamesblogger.com/wp-content/uploads/2016/06/the-legend-of-zelda-breath-of-the-wild-wide-art.jpg);
+  /* background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%),
+    url(https://cdn.videogamesblogger.com/wp-content/uploads/2016/06/the-legend-of-zelda-breath-of-the-wild-wide-art.jpg); */
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -488,6 +488,7 @@ body {
 
 .recommendedGames .containerGameCarousel .gameCarousel .videoGame{
   min-width: 16%;
+  height: 350px;
   transition: .3s ease all;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, .3);
   margin-right: 10px;
@@ -496,7 +497,7 @@ body {
 .recommendedGames .containerGameCarousel .gameCarousel .videoGame img{
   width:100%;
   vertical-align: top;
-
+  height: 100%;
 }
 
 .recommendedGames .containerGameCarousel .gameCarousel .videoGame.hover{
