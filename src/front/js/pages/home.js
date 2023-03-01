@@ -6,7 +6,6 @@ import "../../styles/home.css";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
-
   return (
     <main>
       <div className="principalGame">
@@ -50,10 +49,10 @@ export const Home = () => {
                 <a href="/game/2"><img src="https://cdn.europosters.eu/image/750/posters/super-mario-odyssey-collage-i50045.jpg"></img></a>
               </div>
               <div className="videoGame">
-                <a href="/game/1"><img src="https://thumbnails.pcgamingwiki.com/d/d0/Vampire_Survivors_cover.jpg/300px-Vampire_Survivors_cover.jpg"></img></a>
+                <a href="/game/4"><img src="https://thumbnails.pcgamingwiki.com/d/d0/Vampire_Survivors_cover.jpg/300px-Vampire_Survivors_cover.jpg"></img></a>
               </div>
               <div className="videoGame">
-                <a href="/game/1"><img src="https://upload.wikimedia.org/wikipedia/en/f/fc/Hi-Fi_Rush_cover_art.jpg"></img></a>
+                <a href="/game/3"><img src="https://upload.wikimedia.org/wikipedia/en/f/fc/Hi-Fi_Rush_cover_art.jpg"></img></a>
               </div>
               <div className="videoGame">
                 <a href="/game/1"><img src="https://m.media-amazon.com/images/M/MV5BNjU4Y2M4NGUtZTY4OC00MDEzLThhYWItOTEyMGUwMWVjMzE0XkEyXkFqcGdeQXVyMTk2OTAzNTI@._V1_FMjpg_UX1000_.jpg"></img></a>

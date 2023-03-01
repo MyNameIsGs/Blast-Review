@@ -12,6 +12,10 @@ export const Navbar = () => {
         <Link to="/">
           <span className="navbar-brand mb-0 h1"><img src="https://i.ibb.co/3Fmr1HB/Blast-Review-Logo.png" className="logoBlast"></img></span>
         </Link>
+        <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
+        <button class="btn btn-sm btn-outline-secondary" type="submit">Search</button>
+      </form>
         <div className="ml-auto">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {store.user ? (
@@ -39,6 +43,12 @@ export const Navbar = () => {
               </>
             ) : (
               <>
+              
+                  <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="/rateInfo">
+                    How You Should Rate
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a class="nav-link" aria-current="page" href="/login">
                     Log in
