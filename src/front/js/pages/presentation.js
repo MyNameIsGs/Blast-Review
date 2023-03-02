@@ -44,9 +44,11 @@ export const Presentation = () => {
           </p>
         </div>
         <div className="mt-5 p-3 w-25 m-auto backgroundGame text-white ">
-          <img src="" alt="" width="200px" height="200px" />
-          <h4 className="my-2"></h4>
-          <p></p>
+          <img src="https://i.ibb.co/4gkwCLs/7-C38905-C-BA0-A-4-D0-F-A8-E1-5492042-C8-F63.jpg" alt="" width="200px" height="200px" />
+          <h4 className="my-2">Sebastián Cardona</h4>
+          <p>Un desarrollador en proceso que se le da principalmente bien el diseño web,
+            apasionado por los videojuegos y trucos con cartas.
+          </p>
         </div>
       </div>
       <div>

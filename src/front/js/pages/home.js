@@ -31,7 +31,7 @@ export const Home = () => {
 
     const data = await resp.json();
 
-    setMainGame(data);
+    setMainGame(data.result);
   }
 
   useEffect(() => {
