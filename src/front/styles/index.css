@@ -1,14 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
-
-
 /*backgrounds*/
 
 body {
   background-image: url(https://i.ibb.co/b2Q0mRJ/Blast-Review.png);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center 120px;
+  background-attachment:fixed;
 }
 .marginPage {
   margin-left: 100px;
@@ -298,7 +296,6 @@ body {
   border-bottom-color: #bb2263;
 }
 
-
 .singlePlayer {
   background-color: #5034ec;
   border-top-color: #8c7af3;
@@ -336,22 +333,19 @@ body {
   border-bottom-color: #1c1c1c;
 }
 
-.pc{
-  
+.pc {
   background-color: #ff4f00;
   border-top-color: #ff844d;
   border-bottom-color: #b33700;
-
-
 }
 
-.tabTags{
+.tabTags {
   min-width: 400px;
 }
 
 /* Principal Game */
 
-.spaceMargin{
+.spaceMargin {
   width: 95%;
   margin: auto;
   height: fit-content;
@@ -359,54 +353,178 @@ body {
 
 .principalGame {
   font-size: 14px;
-  min-height:30.62em;
+  min-height: 30.62em;
   color: white;
-  background: linear-gradient(rgba(0, 0, 0, .50)0%, rgba(0, 0, 0, .50) 100% ),url(https://cdn.videogamesblogger.com/wp-content/uploads/2016/06/the-legend-of-zelda-breath-of-the-wild-wide-art.jpg);
+  /* background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%),
+    url(https://cdn.videogamesblogger.com/wp-content/uploads/2016/06/the-legend-of-zelda-breath-of-the-wild-wide-art.jpg); */
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   margin-bottom: 2.12em;
   display: flex;
-  align-items: end
+  align-items: end;
 }
 
-.principalGame .spaceMargin{
+.principalGame .spaceMargin {
   margin-top: 0;
   margin-bottom: 4.25em;
-  margin-left:4.25em;
+  margin-left: 4.25em;
 }
 
-.principalGame .principalGameTitle{
+.principalGame .principalGameTitle {
   font-weight: 600;
-  font-size:2.5em;
-  margin-bottom:0.4em;
+  font-size: 2.5em;
+  margin-bottom: 0.4em;
 }
-.principalGame .principalGameButton{
-  background:rgba(0, 0, 0, .50);
-  border:none;
+.principalGame .principalGameButton {
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
   border-radius: 0.31em;
   padding: 0.93em 1.87em;
   color: white;
   margin-right: 1.25em;
   cursor: pointer;
-  transition: .3s ease all;
+  transition: 0.3s ease all;
   font-size: 0.8em;
-
 }
 
-.principalGame .description{
+.principalGame .description {
   font-weight: normal;
   font-size: 1em;
   line-height: 1.75em;
-  max-width:50%;
+  max-width: 50%;
   margin-bottom: 1.25em;
 }
 
-.principalGame .principalGameButton:hover{
+.principalGame .principalGameButton:hover {
   background: white;
   color: black;
 }
 
-.principalGame .principalGameButton i{
+.principalGame .principalGameButton i {
   margin-right: 0.5em;
+}
+
+/*Container Title and Controls*/
+.container-Title-Controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.container-Title-Controls h3 {
+  color: white;
+  font-size: 30px;
+}
+
+.gameIndicators button {
+  background: white;
+  height: 3px;
+  width: 10px;
+  cursor: pointer;
+  border: none;
+  margin-right: 2px;
+}
+
+.gameIndicators button:hover,
+.gameIndicators button.active {
+  background: rgb(197, 19, 197);
+}
+
+/*Carousel*/
+
+.recommendedGames {
+  margin-bottom: 70px;
+}
+
+.recommendedGames .principalContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+
+.recommendedGames .principalContainer #leftArrow,
+.recommendedGames .principalContainer #rightArrow {
+  position: absolute;
+  border: none;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 40px;
+  height: 50%;
+  top: calc(50% -25%);
+  line-height: 40px;
+  width: 50px;
+  color: white;
+  cursor: pointer;
+  z-index: 500;
+  transition: 0.2s ease all;
+}
+
+.recommendedGames .principalContainer #leftArrow:hover,
+.recommendedGames .principalContainer #rightArrow:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.recommendedGames .principalContainer #leftArrow {
+  left: 0;
+}
+
+.recommendedGames .principalContainer #rightArrow {
+  right: 0;
+}
+
+.recommendedGames .containerGameCarousel{
+  width:100%;
+  padding: 20px 0;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  
+}
+
+.recommendedGames .containerGameCarousel .gameCarousel{
+  display: flex ;
+  flex-wrap: nowrap;
+}
+
+.recommendedGames .containerGameCarousel .gameCarousel .videoGame{
+  min-width: 16%;
+  height: 350px;
+  transition: .3s ease all;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, .3);
+  margin-right: 10px;
+}
+
+.recommendedGames .containerGameCarousel .gameCarousel .videoGame img{
+  width:100%;
+  vertical-align: top;
+  height: 100%;
+}
+
+.recommendedGames .containerGameCarousel .gameCarousel .videoGame.hover{
+  transform: scale (1.2);
+  transform-origin: center;
+}
+
+/*Media Queries*/
+@media screen and (max-width:800px){
+
+.principalGame{
+  font-size:12px;
+}
+
+.recommendedGames .principalContainer{
+  overflow: visible;
+}
+
+.recommendedGames .principalContainer .gameCarousel{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.recommendedGames .gameIndicators,
+.recommendedGames #leftArrow,
+.recommendedGames #rightArrow{
+  display: none;
+}
 }

@@ -5,12 +5,14 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Context } from "./store/appContext";
 import { Home } from "./pages/home";
+import { Search } from "./pages/search";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Signup } from "./pages/signup";
 import { Login } from "./pages/login";
 import { Game } from "./pages/game";
 import { Private } from "./pages/private";
+import { Presentation } from "./pages/presentation";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -61,7 +63,9 @@ const Layout = () => {
             />
             {/* private routes */}
             <Route element={<Home />} path="/" />
+            <Route element={<Search />} path="/search" />
             <Route element={<Demo />} path="/demo" />
+            <Route element={<Presentation />} path="/presentation" />
             <Route element={<Signup />} path="/signup" />
             <Route element={<Login />} path="/login" />
             <Route element={<Single />} path="/single/:theid" />

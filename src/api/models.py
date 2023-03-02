@@ -1,3 +1,4 @@
+import enum
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 
@@ -39,8 +40,9 @@ class User(db.Model):
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), unique=False, nullable=False)
-    description = db.Column(db.String(400), unique=False, nullable=True)
-    picture = db.Column(db.String(200), unique=False, nullable=True)
+    description = db.Column(db.String(), unique=False, nullable=True)
+    picture = db.Column(db.String(), unique=False, nullable=True)
+    banner = db.Column(db.String(), unique=False, nullable=True)
     release_date = db.Column(db.DateTime(), unique=False, nullable=True)
     author = db.Column(db.String(80), unique=False, nullable=True)
     company = db.Column(db.String(80), unique=False, nullable=True)
@@ -56,6 +58,7 @@ class Game(db.Model):
             "title": self.title,
             "description": self.description,
             "picture": self.picture,
+            "banner": self.banner,
             "author": self.author,
             "company": self.company,
             "release_date": self.release_date,
@@ -68,6 +71,8 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), unique=False, nullable=False)
     description = db.Column(db.String(200), unique=False, nullable=True)
+    is_console = db.Column(db.Boolean(), unique=False, nullable=True, default=False)
+    class_style = db.Column(db.String(80), unique=False, nullable=True)
 
     def __repr__(self):
         return f'<Tag {self.title}>'
@@ -77,6 +82,8 @@ class Tag(db.Model):
             "id": self.id,
             "title": self.title,
             "description": self.description,
+            "is_console": self.is_console,
+            "class_style": self.class_style,
         }
 
 class Comment(db.Model):

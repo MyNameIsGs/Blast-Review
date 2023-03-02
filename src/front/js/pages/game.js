@@ -25,7 +25,7 @@ export const Game = () => {
 
   stars.forEach((star, index1) => {
     star.addEventListener("click", () => {
-      setScore(index1);
+      setScore(index1 + 1);
       stars.forEach((star, index2) => {
         index1 >= index2
           ? star.classList.add("active")
@@ -99,6 +99,10 @@ export const Game = () => {
   useEffect(() => {
     getGame();
   }, []);
+
+  useEffect(() => {
+    getGame();
+  }, [user]);
   return (
     <div className="d-flex pt-3 marginPage">
       <div className="cover p-3 text-center backgroundGame">
@@ -119,7 +123,7 @@ export const Game = () => {
 
               <div>
                 <h2 className="text-center ms-2 mt-2 mb-0 me-3 pixelTitle">
-                  65%
+                  {gameData?.casual_score ? `${gameData.casual_score}%` : ""}
                 </h2>
               </div>
             </div>
@@ -130,7 +134,11 @@ export const Game = () => {
           <div className="pt-2 score habitual">
             <div className="pillHabitual d-flex">
               <div>
-                <h2 className="text-center mt-2 mb-0 ms-2 pixelTitle">95%</h2>
+                <h2 className="text-center mt-2 mb-0 ms-2 pixelTitle">
+                  {gameData?.habitual_score
+                    ? `${gameData.habitual_score}%`
+                    : ""}
+                </h2>
               </div>
               <img
                 src="https://i.ibb.co/2WNrs7H/Pro-Logo.png"
@@ -141,12 +149,18 @@ export const Game = () => {
             <div className="mt-2">
               <p className="pixelText">Habitual Score</p>
             </div>
-            
           </div>
         </div>
 
         <div className="container pt-3 text-white">
-          <div className="tagLook action me-1">
+          {gameData?.tags.map((tag, i) => (
+            <TagPill
+              key={`${tag.id}-${tag.title}`}
+              title={tag.title}
+              customColor={tag.class_style}
+            />
+          ))}
+          {/* <div className="tagLook action me-1">
             <span className="tagPills">Action</span>
           </div>
           <div className="tagLook adventure me-1">
@@ -160,47 +174,49 @@ export const Game = () => {
           </div>
           <div className="tagLook nintendo me-1">
             <span className="tagPills">Nintendo Switch</span>
-          </div>
+          </div> */}
 
           <p>{gameData?.description}</p>
         </div>
 
-        <div className="ps-3">
-          <div className="container commentBox pt-3 ">
-            <div className="mb-3">
-              <div className="pb-2 stars">
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-              </div>
-              <textarea
-                placeholder="Write Your Opinion About This Game"
-                className="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              ></textarea>
-              <div className="d-flex justify-content-end pt-1 pb-1">
-                <button
-                  type="button"
-                  className="btn btn-outline-success btn-sm"
-                  disabled={score === null}
-                  onClick={submit}
-                >
-                  Send
-                </button>
+        {user && (
+          <div className="ps-3">
+            <div className="container commentBox pt-3 ">
+              <div className="mb-3">
+                <div className="pb-2 stars">
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                </div>
+                <textarea
+                  placeholder="Write Your Opinion About This Game"
+                  className="form-control"
+                  id="exampleFormControlTextarea1"
+                  rows="3"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                ></textarea>
+                <div className="d-flex justify-content-end pt-1 pb-1">
+                  <button
+                    type="button"
+                    className="btn btn-outline-success btn-sm"
+                    disabled={score === null}
+                    onClick={submit}
+                  >
+                    Send
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
       <div className=" ms-3 p-3 backgroundGame">
         {gameData &&

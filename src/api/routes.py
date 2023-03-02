@@ -9,6 +9,25 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 api = Blueprint('api', __name__)
 
 
+def calculate_score(comments_serialized, gameSerialized):
+
+    gameTags = [tag['id'] for tag in gameSerialized['tags'] if not tag['is_console']]
+
+    casual_comments_score = []
+    habitual_comments_score = []
+    for comment in comments_serialized:
+        userTags = [tag['id'] for tag in comment['user']['tags'] if not tag['is_console']]
+
+        if len(userTags) > 2 and any(tag in userTags for tag in gameTags):
+            habitual_comments_score.append(comment['score'])
+        else:
+            casual_comments_score.append(comment['score'])
+
+    casual_score = round((sum(casual_comments_score)/len(casual_comments_score)) * 10) if len(casual_comments_score) > 0 else None
+    habitual_score = round((sum(habitual_comments_score)/len(habitual_comments_score)) * 10) if len(habitual_comments_score) > 0 else None
+
+    return { 'casual_score': casual_score, 'habitual_score': habitual_score, }
+
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
 
@@ -145,25 +164,36 @@ def get_single_game(game_id):
     comments_serialized = [{**comment.serialize()} for comment in comments]
     gameSerialized = game.serialize()
 
-    gameTags = [tag['id'] for tag in gameSerialized['tags']]
+    score = calculate_score(comments_serialized, gameSerialized)
 
-    casual_comments_score = []
-    habitual_comments_score = []
-    for comment in comments_serialized:
-        userTags = [tag['id'] for tag in comment['user']['tags']]
-
-        if any(tag in userTags for tag in gameTags):
-            habitual_comments_score.append(comment['score'])
-        else:
-            casual_comments_score.append(comment['score'])
-
-    casual_score = round((sum(casual_comments_score)/len(casual_comments_score)) * 10)
-    habitual_score = round((sum(habitual_comments_score)/len(habitual_comments_score)) * 10)
     response_body = {  
         "comments": comments_serialized, 
-        "casual_score": casual_score,
-        "habitual_score": habitual_score,
+        "casual_score": score['casual_score'],
+        "habitual_score": score['habitual_score'],
         **gameSerialized 
+    }
+    return jsonify(response_body)
+
+@api.route('/maingame/', methods=['GET'])
+def get_main_game():
+
+    games = Game.query.all()
+    games = [{**game.serialize()} for game in games]
+    
+    for game in games:
+
+        comments = Comment.query.filter_by(game_id=game['id']).all()
+        comments_serialized = [{**comment.serialize()} for comment in comments]
+
+        score = calculate_score(comments_serialized, game)
+        game["casual_score"] = score['casual_score'] if score['casual_score'] is not None else 0
+        game["habitual_score"] = score['habitual_score'] if score['habitual_score'] is not None else 0
+
+    games = sorted(games, key=lambda d: d['habitual_score'], reverse=True) 
+
+
+    response_body = {  
+        **games[0] 
     }
     return jsonify(response_body)
 
@@ -173,3 +203,17 @@ def get_tags():
     tags = Tag.query.all()
     
     return jsonify({  "result": [{**tag.serialize()} for tag in tags]})
+
+@api.route('/game', methods=['GET'])
+def get_games():
+
+    like = request.args.get('like')
+    print('like')
+    print(like)
+
+    if like is not None:
+        games = Game.query.filter(Game.title.match(f"%{like}%")).all()
+    else:
+        games = Game.query.all()
+    
+    return jsonify({  "result": [{**game.serialize()} for game in games]})
