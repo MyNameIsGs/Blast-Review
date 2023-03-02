@@ -191,9 +191,12 @@ def get_main_game():
 
     games = sorted(games, key=lambda d: d['habitual_score'], reverse=True) 
 
-
     response_body = {  
-        **games[0] 
+        'result': {
+            **games[0]
+        }
+    } if len(games) > 0 else {
+        'result': None
     }
     return jsonify(response_body)
 
