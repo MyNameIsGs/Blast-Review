@@ -118,8 +118,8 @@ export const Private = () => {
       <h1>Hello there {user?.username}!</h1>
       <h3>Select your interests</h3>
       <div>
-        <div className="container d-flex">
-          <div>
+        <div className="container d-flex justify-content-center">
+          <div className="me-2">
             <h4>All our tags</h4>
             <div className="w-25 m-auto tabTags">
               <div className="rounded bg-dark p-3 d-flex justify-content-evenly flex-wrap">
@@ -154,31 +154,31 @@ export const Private = () => {
                 )}
               </div>
             </div>
+            <div className="m-auto d-flex mt-2 justify-content-end">
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={() =>
+                  setTags(
+                    initial.map((t) => {
+                      return { ...t };
+                    })
+                  )
+                }
+                disabled={submitting}
+              >
+                Undo
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary btn-sm ms-2"
+                onClick={handleSubmit}
+                disabled={submitting}
+              >
+                Apply Changes
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="w-25 m-auto d-flex mt-2 justify-content-end">
-          <button
-            type="button"
-            className="btn btn-secondary btn-sm"
-            onClick={() =>
-              setTags(
-                initial.map((t) => {
-                  return { ...t };
-                })
-              )
-            }
-            disabled={submitting}
-          >
-            Undo
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary btn-sm ms-2"
-            onClick={handleSubmit}
-            disabled={submitting}
-          >
-            Apply Changes
-          </button>
         </div>
       </div>
     </div>
