@@ -110,7 +110,7 @@ export const Game = () => {
         <h6 className="text-center text-white">
           ({gameData?.release_date && getYear(new Date(gameData.release_date))})
         </h6>
-        <img className="imageCover" src={gameData?.picture}></img>
+        <img className="imageCover img-fluid" src={gameData?.picture}></img>
       </div>
       <div className="information backgroundGame ms-3 p-3 pe-5">
         <div className="d-flex ">
