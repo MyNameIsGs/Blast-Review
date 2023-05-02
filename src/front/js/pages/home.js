@@ -42,7 +42,7 @@ export const Home = () => {
   return (
     <main>
       <div
-        className="principalGame"
+        className="principalGame img-fluid"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url(${mainGame?.banner})`,
           backgroundPosition: 'center center',

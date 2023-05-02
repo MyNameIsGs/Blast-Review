@@ -13,6 +13,7 @@ import { Login } from "./pages/login";
 import { Game } from "./pages/game";
 import { Private } from "./pages/private";
 import { Presentation } from "./pages/presentation";
+import {Rateinfo} from "./pages/rateinfo"
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -70,6 +71,7 @@ const Layout = () => {
             <Route element={<Login />} path="/login" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<Game />} path="/game/:gameId" />
+            <Route element={<Rateinfo />} path="rateinfo" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <ToastContainer
