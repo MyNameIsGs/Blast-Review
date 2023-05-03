@@ -21,13 +21,13 @@ def has_no_empty_params(rule):
     return len(defaults) >= len(arguments)
 
 def generate_sitemap(app):
-    links = ['/admin/']
+    links = ['//']
     for rule in app.url_map.iter_rules():
         # Filter out rules we can't navigate to in a browser
         # and rules that require parameters
         if "GET" in rule.methods and has_no_empty_params(rule):
             url = url_for(rule.endpoint, **(rule.defaults or {}))
-            if "/admin/" not in url:
+            if "//" not in url:
                 links.append(url)
 
     links_html = "".join(["<li><a href='" + y + "'>" + y + "</a></li>" for y in links])
